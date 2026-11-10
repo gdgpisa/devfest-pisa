@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DevFest Pisa 2027 calls v2</title>
+<link rel="stylesheet" href="ds/devfestpisa/components/bundle.css">
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..700&amp;family=Google+Sans+Code:wght@400;500&amp;display=swap">
+<style>
+:root{--surface:#f0f0f0;--surface-raised:#ffffff;--ink:#1e1e1e;--ink-muted:#575757;--hairline:#c4c4c4;--blue:#1f62ff;--green:#00c853;--yellow:#ffbf00;--red:#ff3d2e;--blue-text:#1967d2;--red-text:#c5221f;--pastel-blue:#9ed7ff;--pastel-green:#a8f0a0;--pastel-yellow:#ffe066;--pastel-red:#ffb8c6;--on-pastel:#1e1e1e;--focus:#1967d2;--space-2:2px;--space-3:3px;--space-5:5px;--space-8:8px;--space-13:13px;--space-21:21px;--space-34:34px;--space-55:55px;--space-89:89px;--radius-0:0px;--radius-8:8px;--radius-21:21px;--radius-pill:999px;--stroke-1:1px;--stroke-2:2px;--font-sans:"Google Sans Flex","Google Sans",system-ui,sans-serif;--font-numeral:"Google Sans Flex","Google Sans",system-ui,sans-serif;--font-mono:"Google Sans Code",ui-monospace,Menlo,monospace}
+body{margin:0;background:#f0f0f0;color:#1e1e1e;font-family:"Google Sans Flex","Google Sans",system-ui,sans-serif}
+a{color:#1e1e1e}a:hover{color:#575757}
+a:focus-visible,button:focus-visible{outline:3px solid #1967d2;outline-offset:-6px}
+.wrap{max-width:1280px;margin:0 auto;padding-left:55px;padding-right:55px;box-sizing:border-box}
+.fib{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));aspect-ratio:8/5;width:100%;position:relative;background:#ffffff;box-sizing:border-box;border-top:3px solid #1e1e1e;border-bottom:3px solid #1e1e1e}
+.cell{min-width:0;overflow:hidden;display:flex;flex-direction:column;padding:clamp(16px,2.6vw,55px);box-sizing:border-box;position:relative}
+.spiral{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.spiral path{fill:none;stroke:#1e1e1e;stroke-width:3;vector-effect:non-scaling-stroke}
+.tower{position:absolute;left:30%;bottom:0;width:17%;height:67%;z-index:0}
+.tw{fill:#ffffff;stroke:#1e1e1e;stroke-width:2;vector-effect:non-scaling-stroke}
+.box{position:relative;overflow:hidden;display:block;text-decoration:none;color:#ffffff;min-width:0}
+.face{position:absolute;inset:0;padding:clamp(16px,2.6vw,55px);box-sizing:border-box;display:flex;flex-direction:column}
+.curtain{background:#1e1e1e;color:#f0f0f0;transform:translateY(101%);transition:transform .45s cubic-bezier(.2,.7,.2,1);z-index:2}
+.box:hover .curtain,.box:focus-visible .curtain{transform:translateY(0)}
+.flip{perspective:1400px}
+.flip-in{position:absolute;inset:0;transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.flip:hover .flip-in,.flip:focus-visible .flip-in{transform:rotateY(180deg)}
+.flip .face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip .back{transform:rotateY(180deg);background:#1e1e1e;color:#f0f0f0}
+.arrow{display:inline-block;transition:transform .3s}
+.box:hover .arrow{transform:translateX(5px)}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border:3px solid #1e1e1e;background:#ffffff}
+.strip > div{padding:34px;border-right:2px solid #1e1e1e;display:flex;flex-direction:column;gap:8px;min-width:0}
+.strip > div:last-child{border-right:0}
+.h2{margin:0;font:700 clamp(40px,5.5vw,89px)/0.95 var(--font-sans);letter-spacing:-0.04em;text-wrap:balance}
+.eyebrow{font:700 13px/21px var(--font-sans);letter-spacing:.08em}
+.tier{background:#ffffff;border:3px solid #1e1e1e;padding:34px;display:flex;flex-direction:column;gap:13px;min-width:0}
+.tier ul{margin:0;padding-left:21px;font:400 16px/26px var(--font-sans)}
+@media (prefers-reduced-motion:reduce){.curtain,.flip-in,.arrow{transition:none}}
+@media (max-width:760px){
+  .fib{aspect-ratio:auto;grid-template-columns:1fr;grid-template-rows:none}
+  .fib > *{grid-column:auto !important;grid-row:auto !important;min-height:220px;border-bottom:2px solid #1e1e1e}
+  .spiral,.tower{display:none}
+  .wrap{padding-left:16px;padding-right:16px}
+  .strip > div{border-right:0;border-bottom:2px solid #1e1e1e}
+}
+</style>
+
+
+<div style="background: #f0f0f0; color: #1e1e1e; font-family: var(--font-sans);">
+
+<!-- Nav -->
+<header>
+  <nav class="wrap" aria-label="Main" style="padding-top: 21px; padding-bottom: 21px; display: flex; flex-wrap: wrap; align-items: center; gap: 21px;">
+    <a href="#top" style="display: flex; align-items: center;"><img src="assets/devfest-lockup-braces.png" alt="DevFest" style="height: 40px; width: auto; display: block;"></a>
+    <span style="font: 700 13px/21px var(--font-sans); letter-spacing: .08em; border: 2px solid #1e1e1e; border-radius: 999px; padding: 3px 13px; background: #ffffff;">PISA</span>
+    <div style="flex: 1 1 auto;"></div>
+    <div style="display: flex; flex-wrap: wrap; gap: 34px; font: 500 16px/26px var(--font-sans);">
+      <a href="#speakers" style="text-decoration: none;">Call for Speakers</a>
+      <a href="#sponsors" style="text-decoration: none;">Call for Sponsors</a>
+    </div>
+    <a class="dp-btn dp-btn--outline" href="https://gdgpisa.it/telegram" style="text-decoration: none;">Get updates on Telegram</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<section aria-label="DevFest Pisa 2027 is coming">
+  <div class="fib">
+
+    <!-- 5-square: title in the corner the spiral turns around -->
+    <div class="cell" style="grid-column: 1 / 6; grid-row: 1 / 6; justify-content: flex-end; align-items: flex-end; text-align: right; gap: 21px; border-right: 2px solid #1e1e1e;">
+      <div class="eyebrow" style="color: #575757; position: relative; z-index: 1;">SAVE THE DATE · [DATE] 2027</div>
+      <h1 style="margin: 0; font: 700 clamp(40px, 5.4vw, 88px)/0.92 var(--font-sans); letter-spacing: -0.04em; max-width: 4.8em; position: relative; z-index: 1;">DevFest Pisa is back.</h1>
+      <p style="margin: 0; font: 400 clamp(15px, 1.3vw, 19px)/1.5 var(--font-sans); max-width: 19em; position: relative; z-index: 1;">Tickets open later. Right now we are looking for speakers and sponsors.</p>
+    </div>
+
+    <!-- 3-square: Call for Speakers, curtain reveal on hover -->
+    <a class="box" href="#speakers" style="grid-column: 6 / 9; grid-row: 1 / 4; background: #1f62ff; border-bottom: 2px solid #1e1e1e;">
+      <span class="face" style="justify-content: space-between;">
+        <span class="eyebrow">OPEN NOW</span>
+        <span>
+          <span style="display: block; font: 700 clamp(34px, 4.6vw, 80px)/0.92 var(--font-sans); letter-spacing: -0.04em;">Call for Speakers</span>
+          <span style="display: block; font: 500 clamp(16px, 1.5vw, 21px)/1.3 var(--font-sans); margin-top: 13px;">Got a talk in mind? <span class="arrow">→</span></span>
+        </span>
+      </span>
+      <span class="face curtain" style="justify-content: space-between;">
+        <span class="eyebrow" style="color: #9ed7ff;">CALL FOR PAPERS · OPEN</span>
+        <span>
+          <span style="display: block; font: 700 clamp(26px, 3vw, 52px)/1 var(--font-sans); letter-spacing: -0.03em;">Got a talk in mind? The Call for Papers is open.</span>
+          <span style="display: block; font: 400 clamp(15px, 1.3vw, 19px)/1.5 var(--font-sans); margin-top: 13px; color: #c4c4c4;">Send us your proposal. First talk or tenth, it is welcome.</span>
+          <span style="display: inline-block; margin-top: 21px; font: 500 16px/26px var(--font-sans); border: 2px solid #f0f0f0; border-radius: 999px; padding: 8px 21px;">Submit on Sessionize <span class="arrow">→</span></span>
+        </span>
+      </span>
+    </a>
+
+    <!-- 2-square: Call for Sponsors, flips on hover -->
+    <a class="box flip" href="#sponsors" style="grid-column: 7 / 9; grid-row: 4 / 6; border-left: 2px solid #1e1e1e; color: #1e1e1e;">
+      <span class="flip-in">
+        <span class="face" style="background: #ffbf00; justify-content: flex-start;">
+          <span style="display: block; font: 700 clamp(21px, 2.6vw, 44px)/0.95 var(--font-sans); letter-spacing: -0.03em;">Call for Sponsors</span>
+          <span style="display: block; font: 500 clamp(13px, 1.2vw, 16px)/1.4 var(--font-sans); margin-top: 8px;">Want a table at the event? <span class="arrow">→</span></span>
+        </span>
+        <span class="face back" style="justify-content: flex-start; gap: 8px;">
+          <span class="eyebrow" style="color: #ffbf00;">CALL FOR SPONSORS</span>
+          <span style="max-width: 15em;">
+            <span style="display: block; font: 700 clamp(16px, 1.7vw, 26px)/1.15 var(--font-sans); letter-spacing: -0.02em;">Would your company like to take part, or have a table at the event?</span>
+            <span style="display: block; font: 500 clamp(13px, 1.2vw, 16px)/1.4 var(--font-sans); margin-top: 13px; color: #ffbf00;">Get in touch <span class="arrow">→</span></span>
+          </span>
+        </span>
+      </span>
+    </a>
+
+    <div class="cell" style="grid-column: 6 / 7; grid-row: 4 / 5; background: #00c853; border-bottom: 2px solid #1e1e1e;"></div>
+    <div class="cell" style="grid-column: 6 / 7; grid-row: 5 / 6; background: #ff3d2e;"></div>
+    <svg class="spiral" viewBox="0 0 8 5" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5 A5 5 0 0 1 5 0 A3 3 0 0 1 8 3 A2 2 0 0 1 6 5 A1 1 0 0 1 5 4 A1 1 0 0 1 6 3"></path></svg>
+  </div>
+</section>
+
+<!-- Call for Speakers -->
+<section id="speakers" class="wrap" style="padding-top: 89px; padding-bottom: 89px; display: flex; flex-direction: column; gap: 55px;">
+  <div style="display: flex; flex-wrap: wrap; gap: 34px 89px; align-items: flex-end; justify-content: space-between;">
+    <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 21px;">
+      <div class="eyebrow" style="color: #1967d2;">CALL FOR SPEAKERS</div>
+      <h2 class="h2">Got a talk in mind? The Call for Papers is open.</h2>
+      <p style="margin: 0; font: 400 21px/32px var(--font-sans); max-width: 30em;">Send us your proposal: a title and a short abstract are enough. Experienced speaker or first talk ever, we want to hear from you.</p>
+    </div>
+    <a class="dp-btn" href="#speakers" style="text-decoration: none;">Submit on Sessionize</a>
+  </div>
+
+  <div class="strip">
+    <div><div class="eyebrow" style="color: #575757;">TRACKS</div><div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px;"><span class="dp-tag dp-tag--ai">AI</span><span class="dp-tag">Web</span><span class="dp-tag dp-tag--mobile">Mobile</span><span class="dp-tag dp-tag--cloud">Cloud</span></div></div>
+    <div><div class="eyebrow" style="color: #575757;">FORMATS</div><div style="font: 500 21px/28px var(--font-sans);">Talk · Workshop</div><div style="font: 400 16px/26px var(--font-sans); color: #575757;">[Lengths TBC]</div></div>
+    <div><div class="eyebrow" style="color: #575757;">DEADLINE</div><div style="font: 500 21px/28px var(--font-sans);">[DATE]</div></div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border-top: 3px solid #1e1e1e;">
+    <div style="padding: 34px 34px 0 0; display: flex; flex-direction: column; gap: 8px;"><div style="font: 700 89px/0.9 var(--font-numeral); letter-spacing: -0.04em; color: #1967d2;">1</div><div style="font: 500 21px/28px var(--font-sans);">Submit</div><div style="font: 400 16px/26px var(--font-sans); color: #575757;">Open now until [DATE].</div></div>
+    <div style="padding: 34px 34px 0 0; display: flex; flex-direction: column; gap: 8px;"><div style="font: 700 89px/0.9 var(--font-numeral); letter-spacing: -0.04em;">2</div><div style="font: 500 21px/28px var(--font-sans);">Review</div><div style="font: 400 16px/26px var(--font-sans); color: #575757;">The team reads every proposal.</div></div>
+    <div style="padding: 34px 34px 0 0; display: flex; flex-direction: column; gap: 8px;"><div style="font: 700 89px/0.9 var(--font-numeral); letter-spacing: -0.04em;">3</div><div style="font: 500 21px/28px var(--font-sans);">Answer</div><div style="font: 400 16px/26px var(--font-sans); color: #575757;">Speakers hear back by [DATE].</div></div>
+    <div style="padding: 34px 34px 0 0; display: flex; flex-direction: column; gap: 8px;"><div style="font: 700 89px/0.9 var(--font-numeral); letter-spacing: -0.04em;">4</div><div style="font: 500 21px/28px var(--font-sans);">On stage</div><div style="font: 400 16px/26px var(--font-sans); color: #575757;">[DATE] 2027, in Pisa.</div></div>
+  </div>
+</section>
+
+<!-- Call for Sponsors -->
+<section id="sponsors" style="background: #ffbf00; border-top: 3px solid #1e1e1e; border-bottom: 3px solid #1e1e1e;">
+  <div class="wrap" style="padding-top: 89px; padding-bottom: 89px; display: flex; flex-direction: column; gap: 55px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 34px 89px; align-items: flex-end; justify-content: space-between;">
+      <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 21px;">
+        <div class="eyebrow">CALL FOR SPONSORS</div>
+        <h2 class="h2">Want your company at DevFest Pisa?</h2>
+        <p style="margin: 0; font: 400 21px/32px var(--font-sans); max-width: 30em;">Whether you want to support the event or have a table to meet attendees, get in touch with us. DevFest is free for everyone thanks to its sponsors.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+        <a class="dp-btn" href="#sponsors" style="text-decoration: none;">Get in touch</a>
+        <a href="#sponsors" style="font: 500 16px/26px var(--font-sans);">Download the partnership proposal</a>
+        <span style="font: 500 13px/21px var(--font-mono);">pisagdg@gmail.com</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 13px;">
+      <div class="strip">
+        <div><div style="font: 700 89px/0.9 var(--font-numeral); letter-spacing: -0.04em;">500+</div><div style="font: 500 16px/26px var(--font-sans); color: #575757;">attendees</div></div>
+        <div><div style="font: 700 89px/0.9 var(--font-numeral); letter-spacing: -0.04em;">30+</div><div style="font: 500 16px/26px var(--font-sans); color: #575757;">speakers</div></div>
+        <div><div style="font: 700 89px/0.9 var(--font-numeral); letter-spacing: -0.04em;">5+</div><div style="font: 500 16px/26px var(--font-sans); color: #575757;">speakers' nations</div></div>
+      </div>
+      <span style="font: 500 13px/21px var(--font-sans);">DevFest Pisa 2026, as published on the event site.</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 21px;">
+      <div class="tier" style="background: #1e1e1e; color: #f0f0f0;"><div class="eyebrow" style="color: #b4b4b4;">MAIN</div><div style="font: 700 34px/40px var(--font-sans);">[PRICE]</div><ul style="color: #f0f0f0;"><li>[Benefit]</li><li>[Benefit]</li><li>[Benefit]</li></ul></div>
+      <div class="tier"><div class="eyebrow" style="color: #575757;">DIAMOND</div><div style="font: 700 34px/40px var(--font-sans);">[PRICE]</div><ul><li>[Benefit]</li><li>[Benefit]</li><li>[Benefit]</li></ul></div>
+      <div class="tier"><div class="eyebrow" style="color: #575757;">SILVER</div><div style="font: 700 34px/40px var(--font-sans);">[PRICE]</div><ul><li>[Benefit]</li><li>[Benefit]</li></ul></div>
+      <div class="tier"><div class="eyebrow" style="color: #575757;">SUPPORTER</div><div style="font: 700 34px/40px var(--font-sans);">In kind</div><ul><li>[Benefit]</li><li>[Benefit]</li></ul></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background: #1e1e1e; color: #f0f0f0;">
+  <div class="wrap" style="padding-top: 55px; padding-bottom: 34px; display: flex; flex-wrap: wrap; gap: 34px 55px; justify-content: space-between; align-items: flex-end;">
+    <div style="display: flex; flex-direction: column; gap: 13px;">
+      <div style="font: 700 clamp(44px, 6vw, 89px)/0.9 var(--font-sans); letter-spacing: -0.05em;">See you in Pisa.</div>
+      <p style="margin: 0; font: 400 13px/21px var(--font-sans); color: #b4b4b4;">Made by GDG &amp; WTM Pisa · <span style="font-family: var(--font-mono);">pisagdg@gmail.com</span></p>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 21px; font: 400 16px/26px var(--font-sans);">
+      <a href="https://gdgpisa.it/telegram" style="color: #f0f0f0;">Telegram</a>
+      <a href="https://instagram.com/gdgpisa" style="color: #f0f0f0;">Instagram</a>
+      <a href="https://linkedin.com/company/gdg-pisa" style="color: #f0f0f0;">LinkedIn</a>
+      <a href="https://www.youtube.com/@gdgpisa4445" style="color: #f0f0f0;">YouTube</a>
+      <a href="#top" style="color: #f0f0f0;">Code of Conduct</a>
+    </div>
+  </div>
+  <div style="display: flex; height: 21px;" aria-hidden="true">
+    <div style="flex: 1; background: #1f62ff;"></div><div style="flex: 1; background: #00c853;"></div><div style="flex: 2; background: #ffbf00;"></div><div style="flex: 3; background: #ff3d2e;"></div><div style="flex: 5; background: #1f62ff;"></div><div style="flex: 8; background: #00c853;"></div>
+  </div>
+</footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<meta charset="utf-8">
+<title>DevFest Ledger</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--surface); color:var(--text); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; width:960px; height:288px; overflow:hidden; }
+  svg { position:absolute; inset:0; }
+  .plus { stroke:var(--neutral-30); stroke-width:var(--border-1); fill:none; }
+  .neutral { fill:var(--neutral-90); } .red { fill:var(--red-50); } .green { fill:var(--green-50); }
+  .yellow { fill:var(--brand); } .blue { fill:var(--blue-50); }
+  .words { position:absolute; left:var(--space-48); bottom:var(--space-48); max-width:440px; }
+  .name { margin:0; font-size:96px; line-height:.92; font-weight:500; letter-spacing:-.03em; color:var(--text); }
+  .tag { margin:var(--space-16) 0 0; font-size:14px; line-height:20px; color:var(--text-secondary); }
+</style>
+</head>
+<body>
+<div class="cover">
+<svg viewBox="0 0 960 288" width="960" height="288" aria-hidden="true">
+<!--
+  blocks      neutral-90, red-50, green-50, brand (yellow), blue-50: five bars 64 wide (space-64), heights 64, 96, 160, 224, 288 (space-32 multiples), the tallest full height
+  arrangement a rising bar chart bottom-aligned on the bottom edge, x from 528, gaps space-16
+  pattern     precise, technical, 4px grid row: a plus grid at space-48 pitch in neutral-30, because the README says separation by hairlines and charts are the hero imagery
+  scales      space-64 bar width, space-16 gaps, space-48 pitch, radius-0 bars
+-->
+<path class="plus" d="M500 24h8M504 20v8"/><path class="plus" d="M500 72h8M504 68v8"/><path class="plus" d="M500 120h8M504 116v8"/><path class="plus" d="M500 168h8M504 164v8"/><path class="plus" d="M500 216h8M504 212v8"/><path class="plus" d="M500 264h8M504 260v8"/><path class="plus" d="M548 24h8M552 20v8"/><path class="plus" d="M548 72h8M552 68v8"/><path class="plus" d="M548 120h8M552 116v8"/><path class="plus" d="M548 168h8M552 164v8"/><path class="plus" d="M548 216h8M552 212v8"/><path class="plus" d="M548 264h8M552 260v8"/><path class="plus" d="M596 24h8M600 20v8"/><path class="plus" d="M596 72h8M600 68v8"/><path class="plus" d="M596 120h8M600 116v8"/><path class="plus" d="M596 168h8M600 164v8"/><path class="plus" d="M596 216h8M600 212v8"/><path class="plus" d="M596 264h8M600 260v8"/><path class="plus" d="M644 24h8M648 20v8"/><path class="plus" d="M644 72h8M648 68v8"/><path class="plus" d="M644 120h8M648 116v8"/><path class="plus" d="M644 168h8M648 164v8"/><path class="plus" d="M644 216h8M648 212v8"/><path class="plus" d="M644 264h8M648 260v8"/><path class="plus" d="M692 24h8M696 20v8"/><path class="plus" d="M692 72h8M696 68v8"/><path class="plus" d="M692 120h8M696 116v8"/><path class="plus" d="M692 168h8M696 164v8"/><path class="plus" d="M692 216h8M696 212v8"/><path class="plus" d="M692 264h8M696 260v8"/><path class="plus" d="M740 24h8M744 20v8"/><path class="plus" d="M740 72h8M744 68v8"/><path class="plus" d="M740 120h8M744 116v8"/><path class="plus" d="M740 168h8M744 164v8"/><path class="plus" d="M740 216h8M744 212v8"/><path class="plus" d="M740 264h8M744 260v8"/><path class="plus" d="M788 24h8M792 20v8"/><path class="plus" d="M788 72h8M792 68v8"/><path class="plus" d="M788 120h8M792 116v8"/><path class="plus" d="M788 168h8M792 164v8"/><path class="plus" d="M788 216h8M792 212v8"/><path class="plus" d="M788 264h8M792 260v8"/><path class="plus" d="M836 24h8M840 20v8"/><path class="plus" d="M836 72h8M840 68v8"/><path class="plus" d="M836 120h8M840 116v8"/><path class="plus" d="M836 168h8M840 164v8"/><path class="plus" d="M836 216h8M840 212v8"/><path class="plus" d="M836 264h8M840 260v8"/><path class="plus" d="M884 24h8M888 20v8"/><path class="plus" d="M884 72h8M888 68v8"/><path class="plus" d="M884 120h8M888 116v8"/><path class="plus" d="M884 168h8M888 164v8"/><path class="plus" d="M884 216h8M888 212v8"/><path class="plus" d="M884 264h8M888 260v8"/><path class="plus" d="M932 24h8M936 20v8"/><path class="plus" d="M932 72h8M936 68v8"/><path class="plus" d="M932 120h8M936 116v8"/><path class="plus" d="M932 168h8M936 164v8"/><path class="plus" d="M932 216h8M936 212v8"/><path class="plus" d="M932 264h8M936 260v8"/>
+<rect class="neutral" x="528" y="224" width="64" height="64"/><rect class="red" x="608" y="192" width="64" height="96"/><rect class="green" x="688" y="128" width="64" height="160"/><rect class="yellow" x="768" y="64" width="64" height="224"/><rect class="blue" x="848" y="0" width="64" height="288"/>
+</svg>
+<div class="words">
+<h1 class="name">DevFest<br>Ledger</h1>
+<p class="tag">A data-first test system for DevFest Pisa 2027.</p>
+</div>
+</div>
+</body>
+</html>

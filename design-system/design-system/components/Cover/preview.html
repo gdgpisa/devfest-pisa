@@ -1,0 +1,55 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<meta charset="utf-8">
+<title>DevFest Pisa 2027</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--surface); color:var(--ink); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; width:960px; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:0; width:960px; height:120px; }
+  .art svg { display:block; overflow:visible; }
+  .t { stroke:var(--on-pastel); stroke-width:var(--stroke-2); }
+  .green { fill:var(--green); } .yellow { fill:var(--yellow); } .blue { fill:var(--blue); }
+  .red { fill:var(--red); } .ink { fill:var(--on-pastel); } .ground { fill:var(--surface-raised); }
+  .o { fill:var(--surface-raised); stroke:var(--ink); stroke-width:var(--stroke-2); }
+  .sp { fill:none; stroke:var(--on-pastel); stroke-width:var(--stroke-2); stroke-linecap:round; }
+  .words { position:absolute; left:var(--space-34); right:var(--space-34); bottom:var(--space-34); max-width:900px; }
+  .name { margin:0; font-size:64px; line-height:.95; font-weight:700; letter-spacing:-.01em; color:var(--ink); }
+  .tag { margin:var(--space-13) 0 0 2px; font-size:14px; line-height:21px; color:var(--ink-muted); max-width:440px; }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 960 120" width="960" height="120">
+<!--
+  blocks      green 144 (space-89 + space-55), yellow 89 (space-89), blue 55 (space-55), red 34 (space-34), ink 21 (space-21): one Fibonacci tiling, 233 x 144, bled off the top right
+  arrangement top-band skeleton: one tall slab with satellites; loose squares 8 13 21 34 55 89, coloured as their places in the tiling, grow toward it at space-55 gaps, bottoms on one line
+  pattern     literal motif row: the shell spiral as quarter circles through the tiling, because the README's rule is "the sequence is the ruler" and the spiral proves it
+  scales      space-8 to space-89 for sides, space-55 gaps, radius-0 corners, stroke-2 contours
+-->
+<rect class="t ground" x="177" y="112" width="8" height="8"/>
+<rect class="t ground" x="240" y="107" width="13" height="13"/>
+<rect class="t ink" x="308" y="99" width="21" height="21"/>
+<rect class="t red" x="384" y="86" width="34" height="34"/>
+<rect class="t blue" x="473" y="65" width="55" height="55"/>
+<rect class="t yellow" x="583" y="31" width="89" height="89"/>
+<g transform="translate(727 -24)">
+<rect class="t green" x="0" y="0" width="144" height="144"/><rect class="t yellow" x="144" y="0" width="89" height="89"/>
+<rect class="t blue" x="178" y="89" width="55" height="55"/><rect class="t red" x="144" y="110" width="34" height="34"/>
+<rect class="t ink" x="144" y="89" width="21" height="21"/><rect class="t ground" x="165" y="89" width="13" height="13"/><rect class="t ground" x="165" y="102" width="13" height="8"/>
+<path class="sp" d="M0 144 A144 144 0 0 1 144 0 A89 89 0 0 1 233 89 A55 55 0 0 1 178 144 A34 34 0 0 1 144 110 A21 21 0 0 1 165 89 A13 13 0 0 1 178 102"/>
+</g>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">DevFest Pisa 2027</h1>
+<p class="tag">Numbers as image, the Fibonacci sequence as ruler. Built on the official DevFest kit.</p>
+</div>
+</div>
+</body>
+</html>
