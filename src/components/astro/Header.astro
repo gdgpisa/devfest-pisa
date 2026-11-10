@@ -1,78 +1,69 @@
 ---
-import devfestLogoSvg from '@/assets/devfest-logo.svg'
-import '@/styles/navbar.css'
-import { Icon } from 'astro-icon/components'
+import LocationLockup from '@/components/astro/LocationLockup.astro'
+
+const links = [
+    { href: '/location', label: 'Location' },
+    { href: '/team', label: 'Team' },
+]
 ---
 
-<script>
-    document.body.classList.toggle('not-on-top', window.scrollY > 0)
-    window.addEventListener('scroll', () => {
-        document.body.classList.toggle('not-on-top', window.scrollY > 0)
-    })
-</script>
-<header>
-    <input id="mobile-nav-trigger" type="checkbox" class="hide" autocomplete="off" />
-    <nav>
-        <div class="nav-item">
-            <a href="/">
-                <img src={devfestLogoSvg.src} alt="Logo of DevFest Pisa 2026" />
-                DevFest Pisa 2026
-            </a>
+<header class="site-header">
+    <nav class="wrap site-nav" aria-label="Main">
+        <a href="/" class="site-nav__brand" aria-label="DevFest Pisa, home">
+            <LocationLockup class="site-nav__logo" />
+        </a>
+        <div class="site-nav__spacer"></div>
+        <div class="site-nav__links">
+            {links.map(link => <a href={link.href}>{link.label}</a>)}
         </div>
-        <div class="spacer"></div>
-        <div class="nav-item desktop-only">
-            <a href="/speakers">Speakers</a>
-        </div>
-        <div class="nav-item desktop-only">
-            <a href="/schedule">Schedule</a>
-        </div>
-        <div class="nav-item desktop-only">
-            <a href="/news">News</a>
-        </div>
-        <div class="nav-item desktop-only">
-            <a href="/iwd">IWD</a>
-        </div>
-        <div class="nav-item desktop-only">
-            <a href="/location">Location</a>
-        </div>
-        <div class="nav-item desktop-only">
-            <a href="/team">Team</a>
-        </div>
-        <div class="nav-item mobile-only">
-            <label for="mobile-nav-trigger">
-                <Icon name="material-symbols:menu" />
-            </label>
-        </div>
+        <a class="dp-btn dp-btn--outline" href="https://gdgpisa.it/telegram">Get updates on Telegram</a>
     </nav>
-    <div id="mobile-nav" class="mobile-only">
-        <div class="nav-item">
-            <a href="/">
-                <img src={devfestLogoSvg.src} alt="Logo of DevFest Pisa 2026" />
-                DevFest Pisa 2026
-            </a>
-
-            <label for="mobile-nav-trigger">
-                <Icon name="material-symbols:close" />
-            </label>
-        </div>
-        <div class="divider"></div>
-        <div class="nav-item">
-            <a href="/speakers">Speakers</a>
-        </div>
-        <div class="nav-item">
-            <a href="/schedule">Schedule</a>
-        </div>
-        <div class="nav-item">
-            <a href="/news">News</a>
-        </div>
-        <div class="nav-item">
-            <a href="/iwd">IWD</a>
-        </div>
-        <div class="nav-item">
-            <a href="/location">Location</a>
-        </div>
-        <div class="nav-item">
-            <a href="/team">Team</a>
-        </div>
-    </div>
 </header>
+
+<style>
+    .site-nav {
+        padding-top: var(--space-21);
+        padding-bottom: var(--space-21);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-21);
+    }
+
+    .site-nav__brand {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    /* Minimum width of the lockup is 160px (brand book) */
+    .site-nav__brand :global(.site-nav__logo) {
+        width: 196px;
+    }
+
+    .site-nav__spacer {
+        flex: 1 1 auto;
+    }
+
+    .site-nav__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-8) var(--space-34);
+        font: 500 16px/26px var(--font-sans);
+    }
+
+    .site-nav__links a {
+        text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+        .site-nav__spacer {
+            display: none;
+        }
+
+        .site-nav__links {
+            flex-basis: 100%;
+            gap: var(--space-8) var(--space-21);
+        }
+    }
+</style>

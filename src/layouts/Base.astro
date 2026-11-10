@@ -1,6 +1,7 @@
 ---
-import '@/styles/main.css'
-import 'katex/dist/katex.css'
+import '@/styles/tokens.css'
+import '@/styles/ds-components.css'
+import '@/styles/site.css'
 
 import Footer from '@/components/astro/Footer.astro'
 import Header from '@/components/astro/Header.astro'
@@ -9,7 +10,7 @@ type Props = {
     title?: string
 }
 
-const { title = 'DevFest Pisa 2026' } = Astro.props
+const { title = 'DevFest Pisa 2027' } = Astro.props
 ---
 
 <html lang="en">
@@ -25,17 +26,21 @@ const { title = 'DevFest Pisa 2026' } = Astro.props
         <meta property="og:image" content="/favicon.svg" />
         <meta
             property="og:description"
-            content={[
-                `// Leaning into the Future`,
-                `Unisciti alla DevFest Pisa, l'evento che riunisce la community tech per crescere e innovare insieme! 
+            content={`Unisciti alla DevFest Pisa, l'evento che riunisce la community tech per crescere e innovare insieme!
                  Talk ispirazionali, workshop pratici e networking con esperti del settore. Perché solo insieme possiamo
-                 costruire il futuro della tecnologia! 🚀`.replace(/\s+/g, ' '),
-            ].join('\n')}
+                 costruire il futuro della tecnologia! 🚀`.replace(/\s+/g, ' ')}
         />
 
         <!-- Address Bar Color -->
-        <meta name="theme-color" content="#ffbb00" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="#ffbb00" />
+        <meta name="theme-color" content="#ffbf00" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#ffbf00" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..700&family=Google+Sans+Code:wght@400;500&display=swap"
+        />
 
         <script defer src="https://cloud.umami.is/script.js" data-website-id="6a2d9e3e-6360-4797-b976-e15276cc1d42"
         ></script>
@@ -44,7 +49,7 @@ const { title = 'DevFest Pisa 2026' } = Astro.props
     </head>
     <body>
         <Header />
-        <main>
+        <main id="top">
             <slot />
         </main>
         <Footer />
