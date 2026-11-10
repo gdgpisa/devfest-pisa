@@ -1,314 +1,437 @@
 ---
 import Base from '@/layouts/Base.astro'
+import FibTiling from '@/components/astro/FibTiling.astro'
 
-import { Icon } from 'astro-icon/components'
+import towerSvg from '@/assets/tower_pisa_gray.svg'
 
-import HomepageGallery from '@/components/astro/HomepageGallery.astro'
-import KatexSSR from '@/components/astro/KatexSSR.astro'
+const SESSIONIZE_URL = 'https://sessionize.com/devfest-pisa-2027/'
+const EVENT_DATE = '10 April 2027'
+const CFP_DEADLINE = '14 Feb 2027'
+const CONTACT_EMAIL = 'pisagdg@gmail.com'
+const PARTNERSHIP_PROPOSAL_URL =
+    'https://docs.google.com/document/d/1TbuETYCizEvvVMRBR9kTFsLT-X2X5NS7GlV43IZO0xM/edit?usp=sharing'
 
-import towerImageSvg from '@/assets/tower_pisa_beta.svg'
+const steps = [
+    { n: 1, title: 'Submit', text: `Open now until ${CFP_DEADLINE}.` },
+    { n: 2, title: 'Review', text: 'The team reads every proposal.' },
+    { n: 3, title: 'Answer', text: 'Speakers hear back as soon as possible, at the latest by 14 Mar 2027.' },
+    { n: 4, title: 'On stage', text: `${EVENT_DATE}, in Pisa.` },
+]
 
-import { mediaPartners } from '@/assets/data-media-partners'
-import { gdgItalia } from '@/assets/data-gdg-italia'
-import { supporters } from '@/assets/data-supporters'
-import { sponsors } from '@/assets/data-sponsors'
+const stats = [
+    { value: '500+', label: 'attendees' },
+    { value: '30+', label: 'speakers' },
+    { value: '5+', label: "speakers' nations" },
+]
 ---
 
 <Base>
-    <section id="hero">
-        <div id="binary-art"></div>
-        <div class="h-stack">
-            <div class="hero-content v-stack">
-                <div class="text">
-                    <h1>DevFest Pisa 2026</h1>
-                    <h3>18 April 2026 @ MACC</h3>
-                    <p class="motto">// Leaning into the Future</p>
-                </div>
-                <!-- <a class="primary large" href="#cfp" role="button">Call for Papers</a> -->
-                <a class="primary large" href="#tickets" role="button">Get Ticket</a>
-                <!-- <a class="primary large" href="https://devfest.gdgpisa.it" role="button">Go to this year's DevFest!</a> -->
-            </div>
-            <img class="hero-image" src={towerImageSvg.src} alt="Leaning Tower of Pisa" />
+    <FibTiling label="DevFest Pisa 2027 is coming">
+        <!-- 5-square: title in the corner the spiral turns around -->
+        <div class="fib__cell fib__s5">
+            <img class="hero-tower" src={towerSvg.src} alt="" aria-hidden="true" />
+            <div class="eyebrow muted">Save the date · {EVENT_DATE}</div>
+            <h1 class="hero-title">DevFest Pisa<br />is back.</h1>
+            <p class="hero-text">Tickets open later. Right now we are looking for speakers and sponsors.</p>
         </div>
-        <script>
-            import { BinaryGrid } from '@/lib/client/binary-art-10y'
-            const $binaryArtContainer = document.getElementById('binary-art')!
-            new BinaryGrid($binaryArtContainer, {
-                cellSize: 32,
-                fontSize: 16,
-                fontFamily: "'Roboto Mono', 'Courier New', monospace",
-                updateInterval: 10,
-                samplingRate: 0.005,
-                colors: {
-                    base: '#7cbdff',
-                    bg: '#a5d2ff',
-                    highlight: '#579ee5',
-                },
-            })
-        </script>
-    </section>
 
-    <section id="tickets">
-        <h2>Get Ticket</h2>
-        <div class="card large">
-            <div class="text">
-                <p>
-                    Get now your FREE ticket for DevFest Pisa 2026! Join us for a day of learning, networking, and fun
-                    with the tech community in Pisa.
+        <!-- 3-square: Call for Speakers, curtain reveal on hover -->
+        <a class="fib__s3 box box--speakers" href="#speakers">
+            <span class="face">
+                <span class="eyebrow">Open now</span>
+                <span>
+                    <span class="box-title">Call for Speakers</span>
+                    <span class="box-hint">Got a talk in mind? <span class="arrow">→</span></span>
+                </span>
+            </span>
+            <span class="face curtain">
+                <span class="eyebrow curtain__eyebrow">Call for Papers · Open</span>
+                <span>
+                    <span class="curtain__title">Got a talk in mind? The Call for Papers is open.</span>
+                    <span class="curtain__text">Send us your proposal. First talk or tenth, it is welcome.</span>
+                    <span class="curtain__action">Submit on Sessionize <span class="arrow">→</span></span>
+                </span>
+            </span>
+        </a>
+
+        <!-- 2-square: Call for Sponsors, flips on hover -->
+        <a class="fib__s2 box flip" href="#sponsors">
+            <span class="flip-in">
+                <span class="face flip__front">
+                    <span class="flip__title">Call for Sponsors</span>
+                    <span class="flip__hint">Want a table at the event? <span class="arrow">→</span></span>
+                </span>
+                <span class="face flip__back">
+                    <span class="eyebrow flip__eyebrow">Call for Sponsors</span>
+                    <span class="flip__copy">
+                        <span class="flip__question">
+                            Would your company like to take part, or have a table at the event?
+                        </span>
+                        <span class="flip__cta">Get in touch <span class="arrow">→</span></span>
+                    </span>
+                </span>
+            </span>
+        </a>
+
+        <div class="fib__cell fib__s1a" style="background: var(--green);"></div>
+        <div class="fib__cell fib__s1b" style="background: var(--red);"></div>
+    </FibTiling>
+
+    <!-- Call for Speakers -->
+    <section id="speakers" class="wrap section">
+        <div class="section-head">
+            <div class="section-head__text">
+                <div class="eyebrow text-blue">Call for Speakers</div>
+                <h2 class="h2">Got a talk in mind? The Call for Papers is open.</h2>
+                <p class="lead">
+                    Send us your proposal: a title and a short abstract are enough. Experienced speaker or first talk
+                    ever, we want to hear from you.
                 </p>
             </div>
-            <a class="large" href="https://www.eventbrite.it/e/devfest-pisa-2026-tickets-1985159725177" role="button">
-                <Icon name="mdi:ticket-account" />
-                Book Now
-            </a>
+            <a class="dp-btn" href={SESSIONIZE_URL}>Submit on Sessionize</a>
         </div>
-    </section>
 
-    <section id="cfp">
-        <h2>Call for Papers</h2>
-        <!-- 
-            ".card.large" can use the attribute "data-diagonal-message" to display 
-            the diagonal message for the closed CFP. This automatically disables the
-            links inside the card.
-            
-            See the CSS for more details.
-        -->
-        <div class="card large" data-diagonal-message="Closed!">
-            <div class="text">
-                <p>
-                    Call For Paper is closing soon! 🚀 Don't miss this incredible opportunity to share your knowledge,
-                    inspire others, and contribute to the growth of our amazing community!
-                </p>
-                <p>
-                    Whether you're an experienced speaker or taking the stage for the first time, this is your chance to
-                    make an impact. Submit your talk now and become a speaker! 🎤✨
-                </p>
-            </div>
-            <a class="large" href="https://sessionize.com/gdg-devfest-pisa-2026/" role="button">Submit your talk</a>
-        </div>
-    </section>
-
-    <section id="stats">
-        <div class="stats-layouts">
-            <div class="stats-card card large">
-                <div class="text">
-                    <h2>DevFest Pisa 2026 is coming soon!</h2>
-                    <p>
-                        After last year's success, GDG Pisa is happy to announce that DevFest Pisa is coming back in
-                        town with new surprises! You can enjoy a one-day conference all about AI, Web, Cloud and much
-                        more in the heart of Tuscany.
-                    </p>
-                    <p>
-                        Last year's conference was a blast! Check out the video recap and make sure you don't miss it
-                        next year!
-                    </p>
-                </div>
-                <a class="large" href="https://youtu.be/pR34hDlX7tY" role="button">
-                    <Icon name="material-symbols:play-arrow-rounded" />
-                    DevFest Pisa 2025 Video Recap
-                </a>
-            </div>
-            <div class="card large">
-                <div class="v-stack center">
-                    <div class="text-large">500+</div>
-                    <div class="text-center">Attendees</div>
+        <div class="dp-strip">
+            <div class="dp-strip__item">
+                <div class="eyebrow muted">Tracks</div>
+                <div class="tags">
+                    <span class="dp-tag dp-tag--ai">AI</span>
+                    <span class="dp-tag">Web</span>
+                    <span class="dp-tag dp-tag--mobile">Mobile</span>
+                    <span class="dp-tag dp-tag--cloud">Cloud</span>
                 </div>
             </div>
-            <div class="card large">
-                <div class="v-stack center">
-                    <div class="text-large">30+</div>
-                    <div class="text-center">Speakers</div>
-                </div>
+            <div class="dp-strip__item">
+                <div class="eyebrow muted">Formats</div>
+                <div class="strip-value">Talk · Workshop</div>
+                <div class="body muted">Talk 25 or 45 min · Workshop 1h+</div>
             </div>
-            <div class="card large">
-                <div class="v-stack center">
-                    <div class="text-large">5+</div>
-                    <div class="text-center">Speakers' Nations</div>
-                </div>
-            </div>
-            <div class="card large">
-                <div class="v-stack center">
-                    <div class="text-large">
-                        <KatexSSR formula="n" />+
-                    </div>
-                    <div class="text-center">
-                        After Party Beers <span class="text-emoji">🍻</span>
-                    </div>
-                </div>
+            <div class="dp-strip__item">
+                <div class="eyebrow muted">Deadline</div>
+                <div class="strip-value">Call closes {CFP_DEADLINE}</div>
             </div>
         </div>
-    </section>
 
-    <!-- <section id="iwd">
-        <h2>International Women's Day</h2>
-        <div class="card large">
-            <div class="text">
-                <p>
-                    Together with the <a
-                        class="large"
-                        href="https://developers.google.com/womentechmakers"
-                        target="_blank"
-                        rel="noopener noreferrer">Women Techmakers</a
-                    > group of Pisa, we decided to celebrate International Women's Day (IWD) at our DevFest with a dedicated
-                    track: the IWD track! This will focus on women in tech, diversity, inclusion, and soft skills. We hope
-                    to inspire you and enhance your enjoyment of the DevFest even more.
-                </p>
-            </div>
-            <a class="large" href="/iwd" role="button">Find Out More</a>
-        </div>
-    </section> -->
-
-    <section id="past-editions">
-        <h3>New to DevFest Pisa? Check out our previous editions!</h3>
-        <div class="card-gallery">
-            <div class="h-stack">
-                <div class="card tight">
-                    <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube-nocookie.com/embed/pR34hDlX7tY"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen></iframe>
-                </div>
-                <div class="card tight">
-                    <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube-nocookie.com/embed/v3nYSljL8P4"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen></iframe>
-                </div>
-                <div class="card tight">
-                    <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube-nocookie.com/embed/HOvwmfNEw1I"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen></iframe>
-                </div>
-                <div class="card tight">
-                    <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube-nocookie.com/embed/h5d-EOTWOOU"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen></iframe>
-                </div>
-                <div class="card tight">
-                    <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube-nocookie.com/embed/KKKoFXHC_zc"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <HomepageGallery />
-
-    <section id="sponsors">
-        <div class="v-stack">
-            <h2>Sponsors</h2>
+        <ol class="steps">
             {
-                (Object.keys(sponsors) as (keyof typeof sponsors)[]).map(tier => {
-                    // prettier-ignore
-                    const titleStyle = {
-                        main: `color: #444;`,
-                        diamond: `background-image: linear-gradient(to right, hsl(300, 100%, 70%), hsl(189, 100%, 70%));`,
-                        platinum: `background-image: linear-gradient(to right, hsl(253, 100%, 71%), hsl(0, 0%, 59%));`,
-                        gold: `background-image: linear-gradient(to bottom right, hsl(42, 100%, 63%), hsl(42, 72%, 50%));`,
-                        silver: `background-image: linear-gradient(to bottom right, hsl(0, 0%, 59%), hsl(0, 0%, 31%));`,
-                    }
-
-                    return (
-                        sponsors[tier] && (
-                            <>
-                                <h3 class:list={{ 'text-custom': tier !== 'main' }} style={titleStyle[tier]}>
-                                    <strong>{tier.charAt(0).toUpperCase() + tier.slice(1)}</strong>
-                                </h3>
-                                <div class="small-card-list h-flex-wrap">
-                                    {sponsors[tier]
-                                        ?.toSorted((s1, s2) => s1.name.localeCompare(s2.name))
-                                        .map(sponsor => {
-                                            return (
-                                                <a href={sponsor.url} target="_blank" rel="noopener noreferrer">
-                                                    <div class="card">
-                                                        <img src={sponsor.logo.src} alt={sponsor.name} />
-                                                    </div>
-                                                </a>
-                                            )
-                                        })}
-                                </div>
-                            </>
-                        )
-                    )
-                })
+                steps.map(step => (
+                    <li class="step">
+                        <div class:list={['step__n', { 'text-blue': step.n === 1 }]}>{step.n}</div>
+                        <div class="strip-value">{step.title}</div>
+                        <div class="body muted">{step.text}</div>
+                    </li>
+                ))
             }
-        </div>
+        </ol>
     </section>
 
-    <section id="media-partners">
-        <div class="v-stack">
-            <h2>Partners</h2>
-            <h3><strong>Supporters</strong></h3>
-            <div class="small-card-list h-flex-wrap">
-                {
-                    supporters.map(entry =>
-                        entry.url ? (
-                            <a href={entry.url} target="_blank" rel="noopener noreferrer">
-                                <div class="card">
-                                    <img src={entry.logo.src} alt={entry.name} />
-                                </div>
-                            </a>
-                        ) : (
-                            <div class="card">
-                                <img src={entry.logo.src} alt={entry.name} />
-                            </div>
-                        ),
-                    )
-                }
+    <!-- Call for Sponsors -->
+    <section id="sponsors" class="field field--yellow">
+        <div class="wrap section">
+            <div class="section-head">
+                <div class="section-head__text">
+                    <div class="eyebrow">Call for Sponsors</div>
+                    <h2 class="h2">Want your company at DevFest Pisa?</h2>
+                    <p class="lead">
+                        Whether you want to support the event or have a table to meet attendees, get in touch with us.
+                        DevFest is free for everyone thanks to its sponsors.
+                    </p>
+                </div>
+                <div class="sponsor-actions">
+                    <a class="dp-btn" href={`mailto:${CONTACT_EMAIL}`}>Get in touch</a>
+                    <a class="body sponsor-actions__link" href={PARTNERSHIP_PROPOSAL_URL}
+                        >Download the partnership proposal</a
+                    >
+                    <span class="caption mono">{CONTACT_EMAIL}</span>
+                </div>
             </div>
-            <h3><strong>Media Partners</strong></h3>
-            <div class="small-card-list h-flex-wrap">
-                {
-                    mediaPartners.map(entry => (
-                        <a href={entry.url} target="_blank" rel="noopener noreferrer">
-                            <div class="card">
-                                <img src={entry.logo.src} alt={entry.name} />
+
+            <div class="stats">
+                <div class="dp-strip">
+                    {
+                        stats.map(stat => (
+                            <div class="dp-strip__item">
+                                <div class="dp-strip__value">{stat.value}</div>
+                                <div class="dp-strip__label">{stat.label}</div>
                             </div>
-                        </a>
-                    ))
-                }
-            </div>
-            <h3><strong>GDG Italia</strong></h3>
-            <div class="small-card-list h-flex-wrap">
-                {
-                    gdgItalia.map(entry => (
-                        <a href={entry.url} target="_blank" rel="noopener noreferrer">
-                            <div class="card">
-                                <img src={entry.logo.src} alt={entry.name} />
-                            </div>
-                        </a>
-                    ))
-                }
+                        ))
+                    }
+                </div>
+                <span class="caption">DevFest Pisa 2026, as published on the event site.</span>
             </div>
         </div>
     </section>
 </Base>
+
+<style>
+    /* Hero: 5-square */
+    /* The tower is a faded background, centred in the 5-square and inside the spiral's arc */
+    .hero-tower {
+        position: absolute;
+        left: 30%;
+        bottom: 0;
+        width: 40%;
+        opacity: 0.18;
+        height: auto;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    @media (max-width: 760px) {
+        .hero-tower {
+            display: none;
+        }
+    }
+
+    .fib__s5.fib__cell {
+        gap: var(--space-34);
+    }
+
+    .hero-title {
+        margin: 0;
+        font: 700 clamp(40px, 5vw, 89px) / 1 var(--font-sans);
+        letter-spacing: -0.03em;
+    }
+
+    .hero-text {
+        margin: 0;
+        font: 400 clamp(15px, 1.3vw, 19px) / 1.5 var(--font-sans);
+        max-width: 19em;
+    }
+
+    /* CallBoxes */
+    .box {
+        position: relative;
+        overflow: hidden;
+        display: block;
+        text-decoration: none;
+        color: var(--on-blue);
+        min-width: 0;
+    }
+
+    .box:hover {
+        color: var(--on-blue);
+    }
+
+    .box:focus-visible {
+        outline: var(--space-3) solid var(--focus);
+        outline-offset: -6px;
+    }
+
+    .face {
+        position: absolute;
+        inset: 0;
+        padding: clamp(16px, 2.6vw, 55px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .arrow {
+        display: inline-block;
+        transition: transform 0.3s;
+    }
+
+    .box:hover .arrow,
+    .box:focus-visible .arrow {
+        transform: translateX(5px);
+    }
+
+    /* Call for Speakers: curtain */
+    .box--speakers {
+        background: var(--blue);
+    }
+
+    .box-title {
+        display: block;
+        font: 700 clamp(34px, 4.6vw, 80px) / 0.92 var(--font-sans);
+        letter-spacing: -0.04em;
+    }
+
+    .box-hint {
+        display: block;
+        font: 500 clamp(16px, 1.5vw, 21px) / 1.3 var(--font-sans);
+        margin-top: var(--space-13);
+    }
+
+    .curtain {
+        background: var(--reveal);
+        color: var(--surface);
+        transform: translateY(101%);
+        transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+        z-index: 2;
+    }
+
+    .box:hover .curtain,
+    .box:focus-visible .curtain {
+        transform: translateY(0);
+    }
+
+    .curtain__eyebrow {
+        color: var(--pastel-blue);
+    }
+
+    .curtain__title {
+        display: block;
+        font: 700 clamp(26px, 3vw, 52px) / 1 var(--font-sans);
+        letter-spacing: -0.03em;
+    }
+
+    .curtain__text {
+        display: block;
+        font: 400 clamp(15px, 1.3vw, 19px) / 1.5 var(--font-sans);
+        margin-top: var(--space-13);
+        color: var(--hairline);
+    }
+
+    .curtain__action {
+        display: inline-block;
+        margin-top: var(--space-21);
+        font: 500 16px/26px var(--font-sans);
+        border: var(--stroke-2) solid var(--surface);
+        border-radius: var(--radius-pill);
+        padding: var(--space-8) var(--space-21);
+    }
+
+    /* Call for Sponsors: flip */
+    .flip {
+        perspective: 1400px;
+        color: var(--ink);
+    }
+
+    .flip:hover {
+        color: var(--ink);
+    }
+
+    .flip-in {
+        position: absolute;
+        inset: 0;
+        transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+        transform-style: preserve-3d;
+    }
+
+    .flip:hover .flip-in,
+    .flip:focus-visible .flip-in {
+        transform: rotateY(180deg);
+    }
+
+    .flip .face {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    .flip__front {
+        background: var(--yellow);
+        justify-content: flex-start;
+    }
+
+    .flip__title {
+        display: block;
+        font: 700 clamp(21px, 2.6vw, 44px) / 0.95 var(--font-sans);
+        letter-spacing: -0.03em;
+    }
+
+    .flip__hint {
+        display: block;
+        font: 500 clamp(13px, 1.2vw, 16px) / 1.4 var(--font-sans);
+        margin-top: var(--space-8);
+    }
+
+    .flip__back {
+        transform: rotateY(180deg);
+        background: var(--reveal);
+        color: var(--surface);
+        justify-content: flex-start;
+        gap: var(--space-8);
+    }
+
+    .flip__eyebrow,
+    .flip__cta {
+        color: var(--yellow);
+    }
+
+    .flip__copy {
+        max-width: 15em;
+    }
+
+    .flip__question {
+        display: block;
+        font: 700 clamp(16px, 1.7vw, 26px) / 1.15 var(--font-sans);
+        letter-spacing: -0.02em;
+    }
+
+    .flip__cta {
+        display: block;
+        font: 500 clamp(13px, 1.2vw, 16px) / 1.4 var(--font-sans);
+        margin-top: var(--space-13);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .curtain,
+        .flip-in,
+        .arrow {
+            transition: none;
+        }
+    }
+
+    /* Call for Speakers section */
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-8);
+        margin-top: var(--space-5);
+    }
+
+    .strip-value {
+        font: 500 21px/28px var(--font-sans);
+    }
+
+    .steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        border-top: var(--stroke-3) solid var(--ink);
+    }
+
+    .step {
+        padding: var(--space-34) var(--space-34) 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-8);
+    }
+
+    .step__n {
+        font: 700 89px/0.9 var(--font-numeral);
+        letter-spacing: -0.04em;
+    }
+
+    /* Call for Sponsors section */
+    .sponsor-actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-8);
+        align-items: flex-start;
+    }
+
+    .sponsor-actions__link {
+        font-weight: 500;
+    }
+
+    .stats {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-13);
+    }
+
+    .stats .dp-strip__label {
+        color: var(--ink-muted);
+    }
+
+    @media (max-width: 760px) {
+        .step {
+            padding-right: 0;
+        }
+    }
+</style>
