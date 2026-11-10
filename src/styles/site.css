@@ -1,0 +1,171 @@
+/* DevFest Pisa 2027 · site-wide base styles. Values come from tokens.css. */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--ink);
+    font: 400 16px/26px var(--font-sans);
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: var(--ink);
+}
+
+a:hover {
+    color: var(--ink-muted);
+}
+
+:where(a, button, summary):focus-visible {
+    outline: var(--space-3) solid var(--focus);
+    outline-offset: var(--space-2);
+}
+
+.dp-btn {
+    text-decoration: none;
+}
+
+/* Layout */
+
+.wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: var(--space-55);
+    padding-right: var(--space-55);
+}
+
+.section {
+    padding-top: var(--space-89);
+    padding-bottom: var(--space-89);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-55);
+}
+
+.section-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-34) var(--space-89);
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.section-head__text {
+    flex: 1 1 560px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-21);
+}
+
+/* Colour field: full-bleed band, at most two per page */
+.field {
+    border-top: var(--stroke-3) solid var(--ink);
+    border-bottom: var(--stroke-3) solid var(--ink);
+}
+
+.field--yellow {
+    background: var(--yellow);
+}
+
+.field--raised {
+    background: var(--surface-raised);
+}
+
+/* Type */
+
+.eyebrow {
+    font: 700 13px/21px var(--font-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.h1 {
+    margin: 0;
+    font: 700 clamp(48px, 7vw, 120px) / 0.92 var(--font-sans);
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.h2 {
+    margin: 0;
+    font: 700 clamp(40px, 5.5vw, 89px) / 0.95 var(--font-sans);
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.h3 {
+    margin: 0;
+    font: 700 34px/40px var(--font-sans);
+    letter-spacing: -0.01em;
+}
+
+.lead {
+    margin: 0;
+    font: 400 21px/32px var(--font-sans);
+    max-width: 30em;
+}
+
+.body {
+    margin: 0;
+    font: 400 16px/26px var(--font-sans);
+}
+
+.caption {
+    font: 500 13px/21px var(--font-sans);
+}
+
+.mono {
+    font-family: var(--font-mono);
+}
+
+.muted {
+    color: var(--ink-muted);
+}
+
+.text-blue {
+    color: var(--blue-text);
+}
+
+.numeral-89 {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+    .wrap {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .section {
+        padding-top: var(--space-55);
+        padding-bottom: var(--space-55);
+        gap: var(--space-34);
+    }
+
+    .lead {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}

@@ -1,0 +1,30 @@
+---
+// The official DevFest location lockup: "DevFest" in the yellow braces with
+// the white pill underneath. Only the word "Pisa" is set in type, centred in
+// the pill on the original baseline (see design/design-system/components/LocationLockup).
+import lockup from '@/assets/brand/devfest-location-emptypill.png'
+
+type Props = {
+    class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<svg class:list={['location-lockup', className]} viewBox="0 0 2048 585" role="img" aria-label="DevFest Pisa">
+    <image href={lockup.src} x="0" y="0" width="2048" height="585" />
+    <text x="1024" y="515" text-anchor="middle" font-size="112">Pisa</text>
+</svg>
+
+<style>
+    .location-lockup {
+        display: block;
+        height: auto;
+    }
+
+    .location-lockup text {
+        font-family: var(--font-sans);
+        font-weight: 400;
+        fill: #1e1e1e;
+    }
+</style>

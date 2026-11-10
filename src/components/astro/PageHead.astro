@@ -1,0 +1,40 @@
+---
+type Props = {
+    eyebrow?: string
+    title: string
+}
+
+const { eyebrow, title } = Astro.props
+---
+
+<section class="page-head">
+    <div class="wrap page-head__inner">
+        {eyebrow && <div class="eyebrow muted">{eyebrow}</div>}
+        <h1 class="h1">{title}</h1>
+        <slot />
+    </div>
+</section>
+
+<style>
+    .page-head {
+        background: var(--surface-raised);
+        border-top: var(--stroke-3) solid var(--ink);
+        border-bottom: var(--stroke-3) solid var(--ink);
+    }
+
+    .page-head__inner {
+        padding-top: var(--space-89);
+        padding-bottom: var(--space-55);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-21);
+    }
+
+    @media (max-width: 760px) {
+        .page-head__inner {
+            padding-top: var(--space-55);
+            padding-bottom: var(--space-34);
+        }
+    }
+</style>

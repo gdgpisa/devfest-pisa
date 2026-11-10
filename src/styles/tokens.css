@@ -1,0 +1,136 @@
+/* DevFest Pisa 2027 — generated from tokens.json */
+:root,
+[data-theme='light'] {
+    --surface: #f0f0f0;
+    --surface-raised: #ffffff;
+    --ink: #1e1e1e;
+    --ink-muted: #575757;
+    --hairline: #c4c4c4;
+    --blue: #1f62ff;
+    --green: #00c853;
+    --yellow: #ffbf00;
+    --red: #ff3d2e;
+    --blue-text: #1967d2;
+    --red-text: #c5221f;
+    --halftone-blue: #00b0ff;
+    --halftone-green: #00e676;
+    --halftone-yellow: #ffd600;
+    --halftone-red: #ff4081;
+    --pastel-blue: #9ed7ff;
+    --pastel-green: #a8f0a0;
+    --pastel-yellow: #ffe066;
+    --pastel-red: #ffb8c6;
+    --on-pastel: #1e1e1e;
+    --on-blue: #ffffff;
+    --reveal: #1e1e1e;
+    --focus: #1967d2;
+}
+[data-theme='dark'] {
+    --surface: #1e1e1e;
+    --surface-raised: #2a2a2a;
+    --ink: #f0f0f0;
+    --ink-muted: #b4b4b4;
+    --hairline: #4a4a4a;
+    --blue-text: #8ab4f8;
+    --red-text: #f28b82;
+    --focus: #8ab4f8;
+}
+:root {
+    --space-2: 2px;
+    --space-3: 3px;
+    --space-5: 5px;
+    --space-8: 8px;
+    --space-13: 13px;
+    --space-21: 21px;
+    --space-34: 34px;
+    --space-55: 55px;
+    --space-89: 89px;
+    --radius-0: 0px;
+    --radius-8: 8px;
+    --radius-21: 21px;
+    --radius-pill: 999px;
+    --stroke-3: 3px;
+    --stroke-2: 2px;
+    --stroke-1: 1px;
+    --font-sans: 'Google Sans Flex', 'Google Sans', system-ui, sans-serif;
+    --font-numeral: 'Google Sans Flex', 'Google Sans', system-ui, sans-serif;
+    --font-mono: 'Google Sans Code', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+.numeral-144 {
+    font-family: var(--font-numeral);
+    font-size: 144px;
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+.numeral-89 {
+    font-family: var(--font-numeral);
+    font-size: 89px;
+    line-height: 0.95;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+.numeral-55 {
+    font-family: var(--font-numeral);
+    font-size: 55px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.numeral-34 {
+    font-family: var(--font-numeral);
+    font-size: 34px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.heading-55 {
+    font-family: var(--font-sans);
+    font-size: 55px;
+    line-height: 60px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.heading-34 {
+    font-family: var(--font-sans);
+    font-size: 34px;
+    line-height: 40px;
+    font-weight: 700;
+}
+.heading-21 {
+    font-family: var(--font-sans);
+    font-size: 21px;
+    line-height: 28px;
+    font-weight: 500;
+}
+.lead {
+    font-family: var(--font-sans);
+    font-size: 21px;
+    line-height: 32px;
+    font-weight: 400;
+}
+.body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 400;
+}
+.caption {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 21px;
+    font-weight: 500;
+}
+.label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 21px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+.code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 21px;
+    font-weight: 400;
+}

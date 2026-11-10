@@ -1,0 +1,99 @@
+---
+// Full-bleed golden rectangle (8 x 5). Children are placed with the
+// .fib__s5 / .fib__s3 / .fib__s2 / .fib__s1a / .fib__s1b classes.
+import Spiral from '@/components/astro/Spiral.astro'
+
+type Props = {
+    label?: string
+}
+
+const { label } = Astro.props
+---
+
+<section class="fib-section" aria-label={label}>
+    <div class="fib">
+        <slot />
+        <Spiral />
+    </div>
+</section>
+
+<style is:global>
+    .fib {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        grid-template-rows: repeat(5, minmax(0, 1fr));
+        aspect-ratio: 8 / 5;
+        width: 100%;
+        position: relative;
+        background: var(--surface-raised);
+        border-top: var(--stroke-3) solid var(--ink);
+        border-bottom: var(--stroke-3) solid var(--ink);
+    }
+
+    .fib__cell {
+        min-width: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: clamp(16px, 2.6vw, 55px);
+        position: relative;
+    }
+
+    .fib__s5 {
+        grid-column: 1 / 6;
+        grid-row: 1 / 6;
+        border-right: var(--stroke-2) solid var(--ink);
+    }
+
+    .fib__s3 {
+        grid-column: 6 / 9;
+        grid-row: 1 / 4;
+        border-bottom: var(--stroke-2) solid var(--ink);
+    }
+
+    .fib__s2 {
+        grid-column: 7 / 9;
+        grid-row: 4 / 6;
+        border-left: var(--stroke-2) solid var(--ink);
+    }
+
+    .fib__s1a {
+        grid-column: 6 / 7;
+        grid-row: 4 / 5;
+        border-bottom: var(--stroke-2) solid var(--ink);
+    }
+
+    .fib__s1b {
+        grid-column: 6 / 7;
+        grid-row: 5 / 6;
+    }
+
+    /* Content sits in the corner the spiral turns around */
+    .fib__s5.fib__cell {
+        justify-content: flex-end;
+        align-items: flex-end;
+        text-align: right;
+        gap: var(--space-21);
+    }
+
+    .fib__s5 > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (max-width: 760px) {
+        .fib {
+            aspect-ratio: auto;
+            grid-template-columns: 1fr;
+            grid-template-rows: none;
+        }
+
+        .fib > * {
+            grid-column: auto !important;
+            grid-row: auto !important;
+            min-height: 220px;
+            border: 0 !important;
+            border-bottom: var(--stroke-2) solid var(--ink) !important;
+        }
+    }
+</style>
