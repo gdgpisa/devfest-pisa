@@ -6,15 +6,15 @@ layout: "@/layouts/MarkdownPage.astro"
 
 ### Introduction
 
-GDG Pisa DevFest 2026 is dedicated to providing a harassment-free and inclusive event experience for
+GDG Pisa DevFest 2027 is dedicated to providing a harassment-free and inclusive event experience for
 everyone regardless of gender identity and expression, sexual orientation, disabilities,
 neurodiversity, physical appearance, body size, ethnicity, nationality, race, age, religion, or
 other protected category. We do not tolerate harassment of event participants in any form. GDG Pisa
-DevFest 2026 takes violations of our policy seriously and will respond appropriately.
+DevFest 2027 takes violations of our policy seriously and will respond appropriately.
 
 ### Policy
 
-All participants of GDG Pisa DevFest 2026 events must abide by the following policy:
+All participants of GDG Pisa DevFest 2027 events must abide by the following policy:
 
 Be excellent to each other. We want the event to be an excellent experience for everyone regardless
 of gender identity and expression, sexual orientation, disabilities, neurodiversity, physical
@@ -47,8 +47,8 @@ We all benefit when we create together.
 
 This policy extends to talks, forums, workshops, code labs, social media, parties, hallway
 conversations, all attendees, partners, sponsors, volunteers, event staff, etc. You catch our drift.
-GDG Pisa DevFest 2026 reserves the right to refuse admittance to, or remove any person from, any GDG
-Pisa DevFest 2026 hosted event (including future GDG Pisa DevFest events) at any time in its sole
+GDG Pisa DevFest 2027 reserves the right to refuse admittance to, or remove any person from, any GDG
+Pisa DevFest 2027 hosted event (including future GDG Pisa DevFest events) at any time in its sole
 discretion. This includes, but is not limited to, attendees behaving in a disorderly manner or
 failing to comply with this policy and the terms and conditions herein. If a participant engages in
 harassing or uncomfortable behavior, the event organizers may take any action they deem appropriate,
