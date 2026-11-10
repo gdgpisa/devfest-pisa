@@ -1,5 +1,6 @@
 ---
 import Base from '@/layouts/Base.astro'
+import PageHead from '@/components/astro/PageHead.astro'
 
 function snakecaseToTitleCase(str: string) {
     return str
@@ -48,22 +49,64 @@ const teamMembers = memberPictures
 ---
 
 <Base>
-    <section id="team">
-        <div class="people-list">
-            <div class="wide">
-                <h1>Team</h1>
-            </div>
+    <PageHead title="Team" />
+    <section id="team" class="wrap section">
+        <ul class="people">
             {
                 teamMembers.map(member => (
-                    <div class="person">
-                        <div class="picture">
-                            <img src={member.picture.default.src} alt={`Picture of ${member.fullName}`} />
-                        </div>
-                        <h3>{member.firstName}</h3>
-                        <h3>{member.lastName}</h3>
-                    </div>
+                    <li class="person">
+                        <img src={member.picture.default.src} alt={`Picture of ${member.fullName}`} loading="lazy" />
+                        <h3 class="person__name">
+                            <span>{member.firstName}</span>
+                            <span>{member.lastName}</span>
+                        </h3>
+                    </li>
                 ))
             }
-        </div>
+        </ul>
     </section>
 </Base>
+
+<style>
+    .people {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: var(--space-34) var(--space-21);
+    }
+
+    .person {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-13);
+        min-width: 0;
+    }
+
+    .person img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border: var(--stroke-2) solid var(--ink);
+        background: var(--surface-raised);
+    }
+
+    .person__name {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font: 500 21px/28px var(--font-sans);
+    }
+
+    .person__name span:last-child {
+        font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+        .people {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+</style>

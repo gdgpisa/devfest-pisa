@@ -1,210 +1,241 @@
 ---
 import Base from '@/layouts/Base.astro'
-import { Icon } from 'astro-icon/components'
+import PageHead from '@/components/astro/PageHead.astro'
 
 import macc from '@/assets/macc-pisa.jpg'
 import { Image } from 'astro:assets'
+
+const DIRECTIONS_URL =
+    'https://www.google.com/maps/dir//MACC+-+Meeting+Art+Craft+Center,+Piazza+Vittorio+Emanuele+II,+5,+56125+Pisa+PI'
 ---
 
 <Base>
-    <section id="location-hero">
-        <div class="location-hero-content">
-            <div class="location-text-container">
-                <div class="location-text">
-                    <h1>DevFest Pisa 2026</h1>
-                    <div class="location-badge">
-                        <Icon name="mdi:map-marker" />
-                        <div class="badge-text">
-                            <h3>MACC - Meeting Art Craft Center</h3>
-                            <p>P.za V. Emanuele II, 5, 56125 Pisa PI</p>
-                        </div>
-                    </div>
-                    <a class="primary large" href="#location-map" role="button">
-                        <Icon name="mdi:map-search" />
-                        Find on Map
-                    </a>
-                </div>
-            </div>
-            <div class="location-visual">
-                <div class="location-arno">
-                    <div class="map-pin map-pin-1">
-                        <div class="pin-dot"></div>
-                    </div>
-                    <div class="map-pin map-pin-2">
-                        <div class="pin-dot"></div>
-                    </div>
-                    <div class="map-pin map-pin-3 active">
-                        <div class="pin-dot pin-dot-3"></div>
-                        <div class="pin-label">MACC</div>
-                    </div>
-                    <div class="map-landmark landmark-1">
-                        <div class="landmark-icon">🏛️</div>
-                        <div class="landmark-label">Leaning Tower</div>
-                    </div>
-                    <div class="map-landmark landmark-2">
-                        <div class="landmark-icon">🚉</div>
-                        <div class="landmark-label">Central Station</div>
-                    </div>
-                </div>
-            </div>
+    <PageHead eyebrow="Location" title="DevFest Pisa 2027">
+        <div class="venue">
+            <div class="venue__name">MACC - Meeting Art Craft Center</div>
+            <div class="body muted">P.za V. Emanuele II, 5, 56125 Pisa PI</div>
         </div>
-    </section>
+        <a class="dp-btn" href="#location-map">Find on Map</a>
+    </PageHead>
 
-    <section id="location-info">
-        <h2>Venue Information</h2>
-        <div class="card large">
-            <div class="text">
-                <p>
-                    DevFest Pisa 2026 will be held at the
-                    <a href="https://macc.pisa.it/">
-                        <strong>MACC (Meeting Art Craft Center)</strong>
-                    </a>
+    <section id="location-info" class="wrap section">
+        <h2 class="h2">Venue Information</h2>
+        <div class="info">
+            <div class="info__text">
+                <p class="lead">
+                    DevFest Pisa 2027 will be held at the
+                    <a href="https://macc.pisa.it/"><strong>MACC (Meeting Art Craft Center)</strong></a>
                     in the heart of Pisa. This modern conference center provides an ideal space for our tech community to
                     gather, learn, and network.
                 </p>
-            </div>
-            <Image id="macc-image" src={macc} alt="MACC - Meeting Art Craft Center" />
-            <div class="text">
-                <p>
+                <p class="body">
                     The venue is easily accessible by public transportation and is within walking distance from many of
                     Pisa's famous attractions, including the Leaning Tower and the historical city center.
                 </p>
             </div>
+            <Image class="info__image" src={macc} alt="MACC - Meeting Art Craft Center" />
         </div>
     </section>
 
-    <section id="location-map">
-        <div class="map-list">
-            <div class="wide">
-                <h2>Find Us</h2>
-            </div>
-            <div class="map-item">
-                <div class="title">
-                    <span>MACC - Meeting Art Craft Center</span>
-                    <div class="actions">
-                        <a
-                            href="https://www.google.com/maps/dir//MACC+-+Meeting+Art+Craft+Center,+Piazza+Vittorio+Emanuele+II,+5,+56125+Pisa+PI"
-                            class="button flat square"
-                            target="_blank"
-                        >
-                            <Icon name="mdi:directions" />
-                        </a>
+    <section id="location-map" class="field field--raised">
+        <div class="wrap section">
+            <div class="section-head">
+                <div class="section-head__text">
+                    <h2 class="h2">Find Us</h2>
+                    <div class="venue">
+                        <div class="venue__name">MACC - Meeting Art Craft Center</div>
+                        <div class="caption mono muted">P.za V. Emanuele II, 5, 56125 Pisa PI</div>
                     </div>
+                    <p class="body">
+                        The MACC is located in Piazza Vittorio Emanuele II, close to the Pisa Central Station and the
+                        historic center of the city.
+                    </p>
                 </div>
-                <div class="content">
-                    <div class="timestamp">P.za V. Emanuele II, 5, 56125 Pisa PI</div>
-                    <div class="text">
-                        <p>
-                            The MACC is located in Piazza Vittorio Emanuele II, close to the Pisa Central Station and
-                            the historic center of the city.
-                        </p>
-                    </div>
-                    <div class="map-container">
-                        <object
-                            width="100%"
-                            height="450"
-                            data="https://www.openstreetmap.org/export/embed.html?bbox=10.398583710193636%2C43.71016443480515%2C10.40074020624161%2C43.71169414443872&layer=mapnik&marker=43.71092929450233%2C10.39966195821762"
-                            style="border: none;"></object>
-                        <a
-                            href="https://www.google.com/maps/dir//MACC+-+Meeting+Art+Craft+Center,+Piazza+Vittorio+Emanuele+II,+5,+56125+Pisa+PI"
-                            class="primary"
-                            role="button"
-                            target="_blank"
-                        >
-                            <Icon name="mdi:open-in-new" />
-                            View Larger Map
-                        </a>
-                    </div>
-                </div>
+                <a class="dp-btn dp-btn--outline" href={DIRECTIONS_URL} target="_blank">Directions</a>
             </div>
+            <div class="map">
+                <object
+                    width="100%"
+                    height="450"
+                    data="https://www.openstreetmap.org/export/embed.html?bbox=10.398583710193636%2C43.71016443480515%2C10.40074020624161%2C43.71169414443872&layer=mapnik&marker=43.71092929450233%2C10.39966195821762"
+                ></object>
+            </div>
+            <a class="dp-btn map-link" href={DIRECTIONS_URL} target="_blank">View Larger Map →</a>
         </div>
     </section>
 
-    <section id="location-directions">
-        <h2>How to get there 🚶‍♂️</h2>
-        <div class="directions-list">
-            <div class="card large direction-card">
-                <Icon name="mdi:train" />
-                <h3>By Train</h3>
-                <div class="text">
+    <section id="location-directions" class="wrap section">
+        <h2 class="h2">How to get there</h2>
+        <div class="dp-strip directions">
+            <div class="dp-strip__item">
+                <div class="figure">
+                    <span class="dp-strip__value">4</span>
+                    <span class="dp-strip__label">min walk</span>
+                </div>
+                <h3 class="eyebrow">By Train</h3>
+                <div class="direction-text">
                     <p>
-                        <p>
-                            Pisa's railway station (Pisa Centrale) is directly connected with Turin, Rome, Genova and
-                            Milan. There are frequent connections with the Florence main station (Firenze Santa Maria
-                            Novella) that you can reach with a high-speed train (Freccia Rossa).
-                        </p>
-                        <p>
-                            <a href="http://www.trenitalia.com">
-                                The train schedule is available at the site of Trenitalia
-                            </a>.
-                        </p>
-                        <p>
-                            Recall that in Italy, before getting on the train, you must stamp your ticket by using those
-                            small yellow machines available within the station. The venue is 4 minutes walk from the
-                            train station <strong>Pisa Centrale</strong>.
-                        </p>
-                        <p>
-                            <a href="https://maps.app.goo.gl/p9k59wRKLiAQQPcTA">
-                                Here you can find the directions on Google maps
-                            </a>.
-                        </p>
+                        Pisa's railway station (Pisa Centrale) is directly connected with Turin, Rome, Genova and Milan.
+                        There are frequent connections with the Florence main station (Firenze Santa Maria Novella) that
+                        you can reach with a high-speed train (Freccia Rossa).
+                    </p>
+                    <p>
+                        <a href="http://www.trenitalia.com">The train schedule is available at the site of Trenitalia</a
+                        >.
+                    </p>
+                    <p>
+                        Recall that in Italy, before getting on the train, you must stamp your ticket by using those
+                        small yellow machines available within the station. The venue is 4 minutes walk from the train
+                        station
+                        <strong>Pisa Centrale</strong>.
+                    </p>
+                    <p>
+                        <a href="https://maps.app.goo.gl/p9k59wRKLiAQQPcTA"
+                            >Here you can find the directions on Google maps</a
+                        >.
                     </p>
                 </div>
             </div>
 
-            <div class="card large direction-card">
-                <Icon name="mdi:airplane" />
-                <h3>By Plane</h3>
-                <div class="text">
+            <div class="dp-strip__item">
+                <div class="figure">
+                    <span class="dp-strip__value">3</span>
+                    <span class="dp-strip__label">km from the center</span>
+                </div>
+                <h3 class="eyebrow">By Plane</h3>
+                <div class="direction-text">
                     <p>
-                        <p>
-                            Pisa has an international airport with daily flights to London and Munich, as well as to
-                            Rome, Milan, and other important Italian cities.
-                        </p>
-                        <p>
-                            <a href="http://www.pisa-airport.com/it/i-passeggeri/arrivi/orario-generale.html">
-                                The timetable of incoming and outgoing flights is available at the site of Pisa airport.
-                            </a>
-                        </p>
-                        <p>
-                            The airport is approximately 3 km from the center. The most convenient way to reach the
-                            center is probably by taxi. Taxis are located near the "Arrivals" exit of the air terminal.
-                            If there is no taxi out there, you may call the <a href="http://www.cotapi.it/en/"
-                                >non-stop radio taxi service</a
-                            > by dialing 050 541600.
-                        </p>
-                        <p>
-                            As an alternative you can take the <a href="http://pisa-mover.com/en/">Pisa Mover</a>, a
-                            city train that connects Pisa Airport to Pisa Railway Station (Pisa Centrale), then walk to
-                            the venue (4 minutes walk).
-                        </p>
+                        Pisa has an international airport with daily flights to London and Munich, as well as to Rome,
+                        Milan, and other important Italian cities.
+                    </p>
+                    <p>
+                        <a href="http://www.pisa-airport.com/it/i-passeggeri/arrivi/orario-generale.html">
+                            The timetable of incoming and outgoing flights is available at the site of Pisa airport.
+                        </a>
+                    </p>
+                    <p>
+                        The airport is approximately 3 km from the center. The most convenient way to reach the center
+                        is probably by taxi. Taxis are located near the "Arrivals" exit of the air terminal. If there is
+                        no taxi out there, you may call the <a href="http://www.cotapi.it/en/"
+                            >non-stop radio taxi service</a
+                        > by dialing 050 541600.
+                    </p>
+                    <p>
+                        As an alternative you can take the <a href="http://pisa-mover.com/en/">Pisa Mover</a>, a city
+                        train that connects Pisa Airport to Pisa Railway Station (Pisa Centrale), then walk to the venue
+                        (4 minutes walk).
                     </p>
                 </div>
             </div>
 
-            <div class="card large direction-card">
-                <Icon name="mdi:car" />
-                <h3>By car</h3>
-                <div class="text">
+            <div class="dp-strip__item">
+                <div class="figure">
+                    <span class="dp-strip__value">A11</span>
+                    <span class="dp-strip__label">· A12</span>
+                </div>
+                <h3 class="eyebrow">By car</h3>
+                <div class="direction-text">
                     <p>
-                        <p>
-                            Pisa is near the intersection of two highways: A12 north-south (Genova - Rosignano) and A11
-                            east-west (Pisa - Florence).
-                        </p>
-                        <p>
-                            Pisa is a <em>small town</em> with several pedestrian areas (with access control cameras). Parking
-                            is a bit of a problem and most parking areas are with pay-meters.
-                        </p>
-                        <p>
-                            The closer parking is
-                            <a href="https://maps.app.goo.gl/NyYJUSbcrvWrCD476"> Parcheggio Saba V. Emanuele </a>
-                            but it is not free. One free parkings is
-                            <a href="https://goo.gl/maps/1xpJnXVLowJ2"> Park Pratale </a>
-                            at 30 minutes walk.
-                        </p>
+                        Pisa is near the intersection of two highways: A12 north-south (Genova - Rosignano) and A11
+                        east-west (Pisa - Florence).
+                    </p>
+                    <p>
+                        Pisa is a <em>small town</em> with several pedestrian areas (with access control cameras). Parking
+                        is a bit of a problem and most parking areas are with pay-meters.
+                    </p>
+                    <p>
+                        The closer parking is
+                        <a href="https://maps.app.goo.gl/NyYJUSbcrvWrCD476">Parcheggio Saba V. Emanuele</a>
+                        but it is not free. One free parkings is
+                        <a href="https://goo.gl/maps/1xpJnXVLowJ2">Park Pratale</a>
+                        at 30 minutes walk.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 </Base>
+
+<style>
+    .venue {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .venue__name {
+        font: 500 21px/28px var(--font-sans);
+    }
+
+    .info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: var(--space-34) var(--space-55);
+        align-items: start;
+    }
+
+    .info__text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-21);
+    }
+
+    .info__text a {
+        color: var(--blue-text);
+    }
+
+    .info__image {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: var(--stroke-3) solid var(--ink);
+    }
+
+    .map {
+        border: var(--stroke-3) solid var(--ink);
+        background: var(--surface);
+        line-height: 0;
+    }
+
+    .map object {
+        display: block;
+        border: 0;
+    }
+
+    .map-link {
+        align-self: flex-start;
+    }
+
+    .figure {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: var(--space-8);
+    }
+
+    .directions h3 {
+        margin: 0;
+    }
+
+    .direction-text {
+        font: 400 16px/26px var(--font-sans);
+        color: var(--ink-muted);
+    }
+
+    .direction-text p {
+        margin: 0 0 var(--space-13);
+    }
+
+    .direction-text p:last-child {
+        margin-bottom: 0;
+    }
+
+    .direction-text a {
+        color: var(--blue-text);
+    }
+
+    @media (max-width: 760px) {
+        .info {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
