@@ -1,1 +1,9 @@
 /coc    /code-of-conduct
+
+# DevFest Pisa 2026 pages, archived on their own subdomain.
+# 302 until 2026.devfest.gdgpisa.it is live; switch to 301 afterwards.
+/speakers   https://2026.devfest.gdgpisa.it/speakers   302
+/schedule   https://2026.devfest.gdgpisa.it/schedule   302
+/news       https://2026.devfest.gdgpisa.it/news       302
+/iwd        https://2026.devfest.gdgpisa.it/iwd        302
+/talk/*     https://2026.devfest.gdgpisa.it/talk/:splat 302
