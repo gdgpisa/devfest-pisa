@@ -98,6 +98,10 @@ npm run build
 npm run preview
 ```
 
+### Navigation
+
+`src/components/astro/Header.astro` uses the current yellow-brace DevFest Pisa `LocationLockup`, not the legacy tower logo. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.
+
 ### Path Aliases
 
 The project uses convenient path aliases configured in `tsconfig.json` and `astro.config.mjs`:

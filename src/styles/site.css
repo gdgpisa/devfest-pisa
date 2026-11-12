@@ -1,5 +1,15 @@
 /* DevFest Pisa 2027 · site-wide base styles. Values come from tokens.css. */
 
+:root {
+    --site-header-height: 72px;
+}
+
+@media (max-width: 760px) {
+    :root {
+        --site-header-height: 3rem;
+    }
+}
+
 *,
 *::before,
 *::after {

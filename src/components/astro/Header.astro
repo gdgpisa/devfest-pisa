@@ -4,66 +4,176 @@ import LocationLockup from '@/components/astro/LocationLockup.astro'
 const links = [
     { href: '/location', label: 'Location' },
     { href: '/team', label: 'Team' },
+    { href: 'https://gdgpisa.it/telegram', label: 'Get updates on Telegram' },
 ]
 ---
 
 <header class="site-header">
-    <nav class="wrap site-nav" aria-label="Main">
-        <a href="/" class="site-nav__brand" aria-label="DevFest Pisa, home">
+    <nav class="site-nav" aria-label="Main">
+        <a href="/" class="site-nav__brand" aria-label="DevFest Pisa 2027, home">
             <LocationLockup class="site-nav__logo" />
         </a>
-        <div class="site-nav__spacer"></div>
         <div class="site-nav__links">
             {links.map(link => <a href={link.href}>{link.label}</a>)}
         </div>
-        <a class="dp-btn dp-btn--outline" href="https://gdgpisa.it/telegram">Get updates on Telegram</a>
+        <details class="site-nav__mobile">
+            <summary aria-label="Toggle navigation menu" aria-controls="mobile-navigation">
+                <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+                <svg class="close-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m5 5 14 14M19 5 5 19" />
+                </svg>
+            </summary>
+            <div class="site-nav__panel" id="mobile-navigation">
+                {links.map(link => <a href={link.href}>{link.label}</a>)}
+            </div>
+        </details>
     </nav>
 </header>
 
+<script>
+    const menu = document.querySelector<HTMLDetailsElement>('.site-nav__mobile')
+    const trigger = menu?.querySelector('summary')
+
+    menu?.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            menu.open = false
+            trigger?.focus()
+        }
+    })
+    menu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => { menu.open = false })
+    })
+    document.addEventListener('click', event => {
+        if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) {
+            menu.open = false
+        }
+    })
+    window.matchMedia('(min-width: 761px)').addEventListener('change', event => {
+        if (event.matches && menu) menu.open = false
+    })
+</script>
+
 <style>
+    .site-header {
+        position: relative;
+        z-index: 10;
+        height: var(--site-header-height);
+        background: var(--surface-raised);
+        border-bottom: var(--stroke-2) solid var(--ink);
+    }
+
     .site-nav {
-        padding-top: var(--space-21);
-        padding-bottom: var(--space-21);
+        height: 100%;
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
+        justify-content: space-between;
         gap: var(--space-21);
+        padding: var(--space-8) clamp(16px, 3vw, 48px);
     }
 
     .site-nav__brand {
         display: flex;
         align-items: center;
+        gap: var(--space-13);
         text-decoration: none;
+        white-space: nowrap;
+        font: 500 clamp(20px, 2.5vw, 28px)/1.2 var(--font-sans);
     }
 
-    /* Minimum width of the lockup is 160px (brand book) */
     .site-nav__brand :global(.site-nav__logo) {
         width: 196px;
     }
 
-    .site-nav__spacer {
-        flex: 1 1 auto;
-    }
-
     .site-nav__links {
         display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-8) var(--space-34);
+        align-items: center;
+        gap: var(--space-21);
         font: 500 16px/26px var(--font-sans);
     }
 
-    .site-nav__links a {
+    .site-nav__links a,
+    .site-nav__panel a {
         text-decoration: none;
     }
 
+    .site-nav__mobile {
+        display: none;
+    }
+
     @media (max-width: 760px) {
-        .site-nav__spacer {
-            display: none;
+        .site-nav {
+            height: 100%;
+            gap: var(--space-8);
+            padding-block: 0;
+        }
+
+        .site-nav__brand {
+            height: 100%;
+            gap: var(--space-8);
+            font-size: clamp(18px, 4.5vw, 28px);
+        }
+
+        .site-nav__brand :global(.site-nav__logo) {
+            width: auto;
+            height: 2.25rem;
         }
 
         .site-nav__links {
-            flex-basis: 100%;
-            gap: var(--space-8) var(--space-21);
+            display: none;
+        }
+
+        .site-nav__mobile {
+            display: block;
+        }
+
+        summary {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .close-icon,
+        details[open] .menu-icon {
+            display: none;
+        }
+
+        details[open] .close-icon {
+            display: block;
+        }
+
+        .site-nav__panel {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-13) var(--space-21);
+            background: var(--surface-raised);
+            border-bottom: var(--stroke-2) solid var(--ink);
+            max-height: calc(100dvh - var(--site-header-height));
+            overflow-y: auto;
+        }
+
+        .site-nav__panel a {
+            padding: var(--space-13) 0;
         }
     }
 </style>
