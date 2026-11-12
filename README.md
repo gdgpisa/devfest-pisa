@@ -98,6 +98,14 @@ npm run build
 npm run preview
 ```
 
+### Homepage hero
+
+At widths up to 760px, the 3rem header and hero fill the dynamic viewport (`100dvh`). The date, introduction, and speaker call share one blue tile, with no spiral segment. The lower block is a 3:2 Fibonacci rectangle sized from its actual width: one 2×2 yellow square and stacked 1×1 green/red squares. Its height is two-thirds of its width, independent of viewport aspect ratio. The original mirrored three-arc path, endpoint, and tile colors are preserved; the arcs remain circular and fully opaque. On short screens the hero grows and scrolls rather than clipping text or flattening the squares. Soft blue text shadows separate the white lettering from the artwork; these halos do not apply to the dark hover/focus reveals.
+
+The mobile blue panel matches the supplied artwork reference: brand blue `#1f62ff`, deep-blue pavement and solid tower/base fill `#184bc1`, and pale-blue tower/base outlines `#5987ff`. An SVG source-alpha filter colors the tower lines directly rather than blending white over the background. The two-point-perspective pavement preserves the asset's base corners and uses an off-panel horizon. A silhouette mask removes the original parallel-sided base and keeps the pavement behind the tower body. The tower retains its 80%-height, 70%-width contain-fit frame and slight right-edge crop. Floor tiles and seams are baked into two SVG paths at build time, without client-side geometry or per-tile elements.
+
+Sponsor copy remains right-aligned inside the lower curve. Mobile typography and spacing respond to viewport width and small-viewport height, while the blue row retains enough height for its content. Wider screens retain the original unmasked tower, white introduction panel, and desktop tile arrangement; the 72px header and hero together occupy `100vh`. Secondary hover/focus copy can scroll within its card on short screens. Layout styles live in `src/components/astro/FibTiling.astro`; hero typography, tower positioning, and perspective geometry live in `src/pages/index.astro`.
+
 ### Navigation
 
 `src/components/astro/Header.astro` uses the current yellow-brace DevFest Pisa `LocationLockup`, not the legacy tower logo. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.

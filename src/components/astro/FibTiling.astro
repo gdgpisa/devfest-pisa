@@ -14,6 +14,9 @@ const { label } = Astro.props
     <div class="fib">
         <slot />
         <Spiral />
+        <svg class="fib__mobile-spiral" viewBox="0 3 3 2" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <path d="M3 3 A2 2 0 0 1 1 5 A1 1 0 0 1 0 4 A1 1 0 0 1 1 3"></path>
+        </svg>
     </div>
 </section>
 
@@ -22,11 +25,11 @@ const { label } = Astro.props
         display: grid;
         grid-template-columns: repeat(8, minmax(0, 1fr));
         grid-template-rows: repeat(5, minmax(0, 1fr));
-        aspect-ratio: 8 / 5;
+        height: calc(100vh - var(--site-header-height));
         width: 100%;
         position: relative;
         background: var(--surface-raised);
-        border-top: var(--stroke-3) solid var(--ink);
+        container-type: size;
         border-bottom: var(--stroke-3) solid var(--ink);
     }
 
@@ -81,19 +84,68 @@ const { label } = Astro.props
         z-index: 1;
     }
 
+    .fib__mobile-spiral {
+        display: none;
+    }
+
     @media (max-width: 760px) {
-        .fib {
-            aspect-ratio: auto;
-            grid-template-columns: 1fr;
-            grid-template-rows: none;
+        .fib-section {
+            container-type: inline-size;
         }
 
-        .fib > * {
-            grid-column: auto !important;
-            grid-row: auto !important;
-            min-height: 220px;
-            border: 0 !important;
-            border-bottom: var(--stroke-2) solid var(--ink) !important;
+        .fib {
+            --tile-unit: calc(100cqw / 3);
+            height: auto;
+            min-height: calc(100dvh - var(--site-header-height));
+            container-type: inline-size;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            /* Keep the lower 2×2, 1×1, 1×1 Fibonacci tiles square. */
+            grid-template-rows: minmax(min-content, 1fr) repeat(2, var(--tile-unit));
+            background: var(--yellow);
+        }
+
+        .hero-primary {
+            grid-column: 1 / 4;
+            grid-row: 1;
+            min-height: min-content;
+        }
+
+        .fib__s2 {
+            grid-column: 1 / 3;
+            grid-row: 2 / 4;
+            border-left: 0;
+            border-right: var(--stroke-2) solid var(--ink);
+            z-index: 1;
+        }
+
+        .fib__s1a {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .fib__s1b {
+            grid-column: 3;
+            grid-row: 3;
+        }
+
+        .fib__mobile-spiral {
+            display: block;
+            position: absolute;
+            grid-column: 1 / 4;
+            grid-row: 2 / 4;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            transform: scaleX(-1);
+            z-index: 0;
+        }
+
+        .fib__mobile-spiral path {
+            fill: none;
+            stroke: var(--ink);
+            stroke-width: 3;
+            vector-effect: non-scaling-stroke;
         }
     }
 </style>

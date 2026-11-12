@@ -23,13 +23,100 @@ const stats = [
     { value: '30+', label: 'speakers' },
     { value: '5+', label: "speakers' nations" },
 ]
+
+// Project a tiled floor through the asset's front and side base corners.
+// The off-panel horizon makes both tile axes converge instead of staying parallel.
+const floorFront = { x: 189.7, y: 684.5 }
+const floorLeft = { x: 2.5, y: 575.5 }
+const floorRight = { x: 373, y: 571.5 }
+const floorHorizon = -600
+const floorDepthX = (floorFront.y - floorRight.y) / (floorRight.y - floorHorizon)
+const floorDepthY = (floorFront.y - floorLeft.y) / (floorLeft.y - floorHorizon)
+const floorAxisX = floorRight.x * (1 + floorDepthX) - floorFront.x
+const floorAxisY = floorLeft.x * (1 + floorDepthY) - floorFront.x
+const floorBounds = { left: -1800, right: 600, top: -350, bottom: 700 }
+
+function projectFloor(x: number, y: number) {
+    const depth = 1 + floorDepthX * x + floorDepthY * y
+    return {
+        x: (floorFront.x + floorAxisX * x + floorAxisY * y) / depth,
+        y: floorHorizon + (floorFront.y - floorHorizon) / depth,
+    }
+}
+
+function floorPoint(point: { x: number; y: number }) {
+    return `${point.x.toFixed(1)} ${point.y.toFixed(1)}`
+}
+
+// Bake the pavement into two SVG paths; no client-side geometry or per-tile DOM.
+let floorTiles = ''
+for (let x = -12; x < 48; x++) {
+    for (let y = -12; y < 48; y++) {
+        if ((x + y) % 2 === 0 || 1 + floorDepthX * x + floorDepthY * y <= 0.2) continue
+        const corners = [
+            projectFloor(x, y),
+            projectFloor(x + 1, y),
+            projectFloor(x + 1, y + 1),
+            projectFloor(x, y + 1),
+        ]
+        if (
+            corners.every(point => point.x < floorBounds.left) ||
+            corners.every(point => point.x > floorBounds.right) ||
+            corners.every(point => point.y < floorBounds.top) ||
+            corners.every(point => point.y > floorBounds.bottom)
+        ) continue
+        floorTiles += `M${corners.map(floorPoint).join('L')}Z`
+    }
+}
+
+const floorNearDepth = (floorFront.y - floorHorizon) / (floorBounds.bottom - floorHorizon)
+const floorFarDepth = (floorFront.y - floorHorizon) / (floorBounds.top - floorHorizon)
+let floorLines = ''
+for (let line = -12; line <= 48; line++) {
+    const nearX = projectFloor(line, (floorNearDepth - 1 - floorDepthX * line) / floorDepthY)
+    const farX = projectFloor(line, (floorFarDepth - 1 - floorDepthX * line) / floorDepthY)
+    const nearY = projectFloor((floorNearDepth - 1 - floorDepthY * line) / floorDepthX, line)
+    const farY = projectFloor((floorFarDepth - 1 - floorDepthY * line) / floorDepthX, line)
+    floorLines += `M${floorPoint(nearX)}L${floorPoint(farX)}M${floorPoint(nearY)}L${floorPoint(farY)}`
+}
+const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].map(floorPoint).join('L')}Z`
 ---
 
 <Base>
     <FibTiling label="DevFest Pisa 2027 is coming">
+        <div class="hero-primary">
         <!-- 5-square: title in the corner the spiral turns around -->
         <div class="fib__cell fib__s5">
-            <img class="hero-tower" src={towerSvg.src} alt="" aria-hidden="true" />
+            <svg class="hero-tower" viewBox="0 0 375.6 685.7" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+                <defs>
+                    <clipPath id="hero-floor-bounds">
+                        <rect
+                            x={floorBounds.left}
+                            y={floorBounds.top}
+                            width={floorBounds.right - floorBounds.left}
+                            height={floorBounds.bottom - floorBounds.top}
+                        />
+                    </clipPath>
+                    <path
+                        id="hero-tower-profile"
+                        d="M198 0C240 0 278 18 276 40C275 51 270 60 269 69C293 82 305 101 300 124L296 160C302 176 301 189 296 199L294 232C300 248 298 265 293 274L292 306C299 321 297 338 292 348L290 375C297 391 297 405 291 416L290 442C298 459 294 475 290 484L288 586C285 606 239 626 187 626C138 626 94 607 77 589L79 470C73 456 79 442 83 435L86 398C80 383 85 370 88 362L90 328C83 315 88 301 92 293L94 255C88 242 92 230 96 220L97 184C91 170 96 157 98 149L99 125C93 105 105 82 126 71L127 48C116 29 136 0 198 0Z"
+                    />
+                    <mask id="hero-tower-body" maskUnits="userSpaceOnUse" x="-4" y="-4" width="384" height="635">
+                        <use href="#hero-tower-profile" fill="white" stroke="white" stroke-width="6" />
+                    </mask>
+                    <filter id="hero-tower-ink" color-interpolation-filters="sRGB">
+                        <feFlood flood-color="var(--hero-tower-line)" />
+                        <feComposite in2="SourceAlpha" operator="in" />
+                    </filter>
+                </defs>
+                <g class="hero-ground" clip-path="url(#hero-floor-bounds)">
+                    <path class="hero-ground__tiles" d={floorTiles} />
+                    <path class="hero-ground__lines" d={floorLines} vector-effect="non-scaling-stroke" />
+                </g>
+                <path class="hero-base" d={floorBase} />
+                <use class="hero-tower__surface" href="#hero-tower-profile" />
+                <image href={towerSvg.src} width="375.6" height="685.7" />
+            </svg>
             <div class="eyebrow muted">Save the date · {EVENT_DATE}</div>
             <h1 class="hero-title">DevFest Pisa<br />is back.</h1>
             <p class="hero-text">Tickets open later. Right now we are looking for speakers and sponsors.</p>
@@ -53,6 +140,7 @@ const stats = [
                 </span>
             </span>
         </a>
+        </div>
 
         <!-- 2-square: Call for Sponsors, flips on hover -->
         <a class="fib__s2 box flip" href="#sponsors">
@@ -73,8 +161,8 @@ const stats = [
             </span>
         </a>
 
-        <div class="fib__cell fib__s1a" style="background: var(--green);"></div>
-        <div class="fib__cell fib__s1b" style="background: var(--red);"></div>
+        <div class="fib__cell fib__s1a"></div>
+        <div class="fib__cell fib__s1b"></div>
     </FibTiling>
 
     <!-- Call for Speakers -->
@@ -164,9 +252,21 @@ const stats = [
 </Base>
 
 <style>
+    .hero-primary {
+        display: contents;
+    }
+
+    .fib__s1a {
+        background: var(--green);
+    }
+
+    .fib__s1b {
+        background: var(--red);
+    }
+
     /* Hero: 5-square */
-    /* The tower is a faded background, centred in the 5-square and inside the spiral's arc */
-    .hero-tower {
+    /* Keep the decorative tower behind the complete introduction. */
+    .fib__s5 > .hero-tower {
         position: absolute;
         left: 30%;
         bottom: 0;
@@ -177,11 +277,12 @@ const stats = [
         pointer-events: none;
     }
 
-    @media (max-width: 760px) {
-        .hero-tower {
-            display: none;
-        }
+    .hero-ground,
+    .hero-base,
+    .hero-tower__surface {
+        display: none;
     }
+
 
     .fib__s5.fib__cell {
         gap: var(--space-34);
@@ -260,6 +361,9 @@ const stats = [
         transform: translateY(101%);
         transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
         z-index: 2;
+        overflow-y: auto;
+        justify-content: flex-start;
+        gap: var(--space-13);
     }
 
     .box:hover .curtain,
@@ -345,6 +449,15 @@ const stats = [
         gap: var(--space-8);
     }
 
+    .flip__back {
+        overflow-y: auto;
+    }
+
+    .curtain > *,
+    .flip__back > * {
+        flex-shrink: 0;
+    }
+
     .flip__eyebrow,
     .flip__cta {
         color: var(--yellow);
@@ -364,6 +477,162 @@ const stats = [
         display: block;
         font: 500 clamp(13px, 1.2vw, 16px) / 1.4 var(--font-sans);
         margin-top: var(--space-13);
+    }
+
+    @media (max-width: 760px) {
+        .hero-primary {
+            --hero-blue-deep: #184bc1;
+            --hero-tower-line: #5987ff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            background: var(--blue);
+            color: var(--on-blue);
+            border-bottom: var(--stroke-2) solid var(--ink);
+        }
+
+        .fib__s5.fib__cell {
+            position: static;
+            overflow: visible;
+            padding: clamp(12px, 3svh, 34px) 7vw 0;
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
+            gap: clamp(8px, 2svh, 21px);
+            border: 0;
+        }
+
+        .fib__s5 .eyebrow {
+            color: inherit;
+        }
+
+        .fib__s5 > :not(.hero-tower) {
+            z-index: 1;
+        }
+
+        /* Soften the artwork only behind the lettering, not across the blue tile. */
+        .fib__s5 > :not(.hero-tower),
+        .box--speakers > .face:not(.curtain) {
+            text-shadow:
+                0 0 var(--space-3) var(--blue),
+                0 0 var(--space-8) var(--blue),
+                0 0 var(--space-13) var(--blue);
+        }
+
+        .fib__s5 > .hero-tower {
+            left: auto;
+            right: -4%;
+            width: 70%;
+            height: 80%;
+            opacity: 1;
+            overflow: visible;
+        }
+
+        .hero-tower image {
+            filter: url(#hero-tower-ink);
+            opacity: 1;
+            mask: url(#hero-tower-body);
+        }
+
+        .hero-ground,
+        .hero-base,
+        .hero-tower__surface {
+            display: inline;
+        }
+
+        .hero-ground__tiles {
+            fill: var(--hero-blue-deep);
+        }
+
+        .hero-ground__lines {
+            fill: none;
+            stroke: color-mix(in srgb, var(--on-blue) 6%, transparent);
+            stroke-width: 0.8;
+        }
+
+        .hero-base {
+            fill: var(--hero-blue-deep);
+            stroke: var(--hero-tower-line);
+            stroke-width: 2.4;
+            opacity: 1;
+        }
+
+        .hero-tower__surface {
+            fill: var(--hero-blue-deep);
+            stroke: var(--hero-blue-deep);
+            stroke-width: 6;
+        }
+
+        .flip__front {
+            background: transparent;
+        }
+
+        .box--speakers {
+            background: transparent;
+            border: 0;
+            flex: 1;
+            min-height: 0;
+            z-index: 1;
+        }
+
+        .box--speakers > .face:not(.curtain) {
+            position: relative;
+            height: 100%;
+            gap: clamp(6px, 1.5svh, 21px);
+            justify-content: flex-end;
+        }
+
+        .hero-title {
+            font-size: clamp(34px, min(11.5vw, 8svh), 68px);
+            line-height: 1.02;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-text {
+            max-width: 22ch;
+            font-size: clamp(15px, min(4.1vw, 2.8svh), 18px);
+            line-height: 1.5;
+            text-wrap: pretty;
+        }
+
+        .face {
+            padding: clamp(12px, 3svh, 34px) 7vw;
+        }
+
+        .box-title {
+            max-width: 6em;
+            font-size: clamp(24px, min(8vw, 5.5svh), 48px);
+            line-height: 1.05;
+        }
+
+        .box-hint {
+            font-size: clamp(15px, min(4vw, 3svh), 20px);
+            margin-top: var(--space-8);
+        }
+
+        .flip__front {
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .flip__title {
+            font-size: clamp(24px, min(7vw, 4.5svh), 44px);
+            line-height: 1.05;
+        }
+
+        .flip__hint {
+            max-width: 14ch;
+            font-size: clamp(14px, min(3.6vw, 2.6svh), 18px);
+        }
+
+        .flip__back {
+            padding: clamp(10px, 2svh, 24px) 5vw;
+        }
+
+        .flip__question {
+            font-size: clamp(14px, min(3.5vw, 3svh), 26px);
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
