@@ -106,6 +106,8 @@ The mobile blue panel matches the supplied artwork reference: brand blue `#1f62f
 
 Sponsor copy remains right-aligned inside the lower curve. Mobile typography and spacing respond to viewport width and small-viewport height, while the blue row retains enough height for its content. Wider screens retain the original unmasked tower, white introduction panel, and desktop tile arrangement. The desktop hero prefers an 8:5 aspect ratio, with its height capped at `100vh` minus the 72px header; once capped, the full-width grid and spiral can stretch. Mobile has no maximum-height cap. Secondary hover/focus copy can scroll within its card on short screens. Layout styles live in `src/components/astro/FibTiling.astro`; hero typography, tower positioning, and perspective geometry live in `src/pages/index.astro`.
 
+The desktop spiral sits above tile backgrounds and below text. Curtain and flip faces reuse cropped views of the same path to preserve that order during hover and keyboard-focus reveals.
+
 ### Navigation
 
 `src/components/astro/Header.astro` pairs `src/assets/devfest-logo.svg` with the DevFest Pisa 2027 name in a full-width, fixed-height header. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.

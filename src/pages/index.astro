@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro'
 import FibTiling from '@/components/astro/FibTiling.astro'
+import Spiral from '@/components/astro/Spiral.astro'
 
 import towerSvg from '@/assets/tower_pisa_gray.svg'
 
@@ -132,6 +133,7 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
                 </span>
             </span>
             <span class="face curtain">
+                <Spiral viewBox="5 0 3 3" />
                 <span class="eyebrow curtain__eyebrow">Call for Papers · Open</span>
                 <span>
                     <span class="curtain__title">Got a talk in mind? The Call for Papers is open.</span>
@@ -146,10 +148,12 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
         <a class="fib__s2 box flip" href="#sponsors">
             <span class="flip-in">
                 <span class="face flip__front">
+                    <Spiral viewBox="6 3 2 2" />
                     <span class="flip__title">Call for Sponsors</span>
                     <span class="flip__hint">Want a table at the event? <span class="arrow">→</span></span>
                 </span>
                 <span class="face flip__back">
+                    <Spiral viewBox="6 3 2 2" />
                     <span class="eyebrow flip__eyebrow">Call for Sponsors</span>
                     <span class="flip__copy">
                         <span class="flip__question">
@@ -326,6 +330,12 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        z-index: 1;
+    }
+
+    .face > span {
+        position: relative;
+        z-index: 1;
     }
 
     .arrow {
@@ -401,6 +411,7 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
     .flip {
         perspective: 1400px;
         color: var(--ink);
+        z-index: 1;
     }
 
     .flip:hover {
