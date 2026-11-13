@@ -25,7 +25,8 @@ const { label } = Astro.props
         display: grid;
         grid-template-columns: repeat(8, minmax(0, 1fr));
         grid-template-rows: repeat(5, minmax(0, 1fr));
-        height: calc(100vh - var(--site-header-height));
+        aspect-ratio: 8 / 5;
+        max-height: calc(100vh - var(--site-header-height));
         width: 100%;
         position: relative;
         background: var(--surface-raised);
@@ -96,6 +97,8 @@ const { label } = Astro.props
         .fib {
             --tile-unit: calc(100cqw / 3);
             height: auto;
+            aspect-ratio: auto;
+            max-height: none;
             min-height: calc(100dvh - var(--site-header-height));
             container-type: inline-size;
             grid-template-columns: repeat(3, minmax(0, 1fr));
