@@ -108,7 +108,7 @@ Sponsor copy remains right-aligned inside the lower curve. Mobile typography and
 
 ### Navigation
 
-`src/components/astro/Header.astro` uses the current yellow-brace DevFest Pisa `LocationLockup`, not the legacy tower logo. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.
+`src/components/astro/Header.astro` pairs `src/assets/devfest-logo.svg` with the DevFest Pisa 2027 name in a full-width, fixed-height header. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.
 
 ### Path Aliases
 
