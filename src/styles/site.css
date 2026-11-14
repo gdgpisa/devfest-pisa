@@ -16,11 +16,9 @@
     box-sizing: border-box;
 }
 
-@media (min-width: 761px) {
-    :root,
-    body {
-        overscroll-behavior-y: none;
-    }
+:root,
+body {
+    overscroll-behavior-y: none;
 }
 
 @media (max-width: 760px) {
