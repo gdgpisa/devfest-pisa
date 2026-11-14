@@ -81,6 +81,7 @@ for (let line = -12; line <= 48; line++) {
     floorLines += `M${floorPoint(nearX)}L${floorPoint(farX)}M${floorPoint(nearY)}L${floorPoint(farY)}`
 }
 const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].map(floorPoint).join('L')}Z`
+const floorFrontEdge = `M${[floorLeft, floorFront, floorRight].map(floorPoint).join('L')}`
 ---
 
 <Base>
@@ -96,6 +97,12 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
                             y={floorBounds.top}
                             width={floorBounds.right - floorBounds.left}
                             height={floorBounds.bottom - floorBounds.top}
+                        />
+                    </clipPath>
+                    <!-- Fixed front edges hide the moving tower below the perspective plane. -->
+                    <clipPath id="hero-tower-opening" clipPathUnits="userSpaceOnUse">
+                        <path
+                            d={`M${floorBounds.left} ${floorBounds.top}H${floorBounds.right}V${floorRight.y}H${floorRight.x}L${floorPoint(floorFront)}L${floorPoint(floorLeft)}H${floorBounds.left}Z`}
                         />
                     </clipPath>
                     <!-- Original tower contour without its platform, including each column foot. -->
@@ -116,8 +123,14 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
                     <path class="hero-ground__lines" d={floorLines} vector-effect="non-scaling-stroke" />
                 </g>
                 <path class="hero-base" d={floorBase} />
-                <use class="hero-tower__surface" href="#hero-tower-profile" />
-                <image href={towerSvg.src} width="375.6" height="685.7" />
+                <path class="hero-base__opening" d={floorBase} />
+                <g class="hero-tower__reveal">
+                    <g class="hero-tower__lift">
+                        <use class="hero-tower__surface" href="#hero-tower-profile" />
+                        <image href={towerSvg.src} width="375.6" height="685.7" />
+                    </g>
+                </g>
+                <path class="hero-base hero-base--front" d={floorFrontEdge} />
             </svg>
             <div class="eyebrow muted">Save the date · {EVENT_DATE}</div>
             <h1 class="hero-title">DevFest Pisa<br />is back.</h1>
@@ -291,10 +304,36 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
 
     .hero-ground,
     .hero-base,
+    .hero-base__opening,
     .hero-tower__surface {
         display: none;
     }
 
+    .hero-tower__lift {
+        animation: hero-tower-rise 1.8s cubic-bezier(0.22, 0.68, 0, 1) 120ms both;
+    }
+
+    .hero-base__opening {
+        opacity: 0;
+    }
+
+    @keyframes hero-tower-rise {
+        from {
+            transform: translateY(690px);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes hero-opening-shade {
+        0%, 65% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
 
     .fib__s5.fib__cell {
         gap: var(--space-34);
@@ -559,6 +598,10 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
             overflow: visible;
         }
 
+        .hero-tower__reveal {
+            clip-path: url(#hero-tower-opening);
+        }
+
         .hero-tower image {
             filter: url(#hero-tower-ink);
             opacity: 1;
@@ -567,6 +610,7 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
 
         .hero-ground,
         .hero-base,
+        .hero-base__opening,
         .hero-tower__surface {
             display: inline;
         }
@@ -586,6 +630,15 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
             stroke: var(--hero-tower-line);
             stroke-width: 2.4;
             opacity: 1;
+        }
+
+        .hero-base--front {
+            fill: none;
+        }
+
+        .hero-base__opening {
+            fill: color-mix(in srgb, var(--hero-blue-deep) 70%, var(--ink));
+            animation: hero-opening-shade 1.8s linear 120ms both;
         }
 
         .hero-tower__surface {
@@ -664,6 +717,11 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
     }
 
     @media (prefers-reduced-motion: reduce) {
+        .hero-tower__lift,
+        .hero-base__opening {
+            animation: none;
+        }
+
         .curtain,
         .flip-in,
         .arrow {

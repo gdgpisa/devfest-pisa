@@ -110,6 +110,8 @@ Sponsor copy remains right-aligned inside the lower curve. Mobile typography and
 
 On desktop, the tower is bottom-anchored and horizontally centered in the white tile. Its height is `calc(84.5% - 6px)` of that tile, with automatic width preserving the SVG aspect ratio. This fits its outline just below the spiral, including the spiral stroke, in both capped and uncapped layouts.
 
+On page load, a CSS-only entrance lifts the tower into place over 1.8 seconds after a 120ms delay. On mobile, the pavement stays fixed: a stationary SVG clip follows the platform's front two edges, hiding the tower below the plane while it rises through the darkened square. The front rim stays above the moving artwork, and the opening's shading fades back to the original tile color as the tower settles. `prefers-reduced-motion: reduce` skips both animations and shows the completed composition immediately.
+
 The desktop spiral sits above tile backgrounds and below text. Curtain and flip faces reuse cropped views of the same path to preserve that order during hover and keyboard-focus reveals.
 
 Hero tile hover reveals and arrow motion require `(hover: hover) and (pointer: fine)`. Touch taps navigate directly to the speakers or sponsors section without opening the curtain or flipping the tile. Keyboard-focus reveals remain available.
