@@ -16,13 +16,16 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+@media (min-width: 761px) {
+    :root,
+    body {
+        overscroll-behavior-y: none;
+    }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
+@media (max-width: 760px) {
+    body:has(.site-nav__mobile[open]) {
+        overflow: hidden;
     }
 }
 

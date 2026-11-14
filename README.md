@@ -110,7 +110,9 @@ The desktop spiral sits above tile backgrounds and below text. Curtain and flip 
 
 ### Navigation
 
-`src/components/astro/Header.astro` pairs `src/assets/devfest-logo.svg` with the DevFest Pisa 2027 name in a full-width, fixed-height header. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.
+`src/components/astro/Header.astro` pairs `src/assets/devfest-logo.svg` with the DevFest Pisa 2027 name in a full-width, fixed-height header. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height and locks background scrolling while open. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.
+
+The header scrolls with the page rather than becoming a floating bar. Desktop overscroll is disabled; anchor navigation uses native scrolling.
 
 ### Path Aliases
 
