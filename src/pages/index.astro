@@ -272,13 +272,20 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
     /* Keep the decorative tower behind the complete introduction. */
     .fib__s5 > .hero-tower {
         position: absolute;
-        left: 30%;
         bottom: 0;
-        width: 40%;
         opacity: 0.18;
-        height: auto;
         z-index: 0;
         pointer-events: none;
+    }
+
+    @media (min-width: 761px) {
+        .fib__s5 > .hero-tower {
+            left: 50%;
+            translate: -50% 0;
+            width: auto;
+            /* Fit the tower's outline below the spiral, including its stroke. */
+            height: calc(84.5% - 6px);
+        }
     }
 
     .hero-ground,

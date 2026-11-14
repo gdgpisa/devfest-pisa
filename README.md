@@ -106,6 +106,8 @@ The mobile blue panel matches the supplied artwork reference: brand blue `#1f62f
 
 Sponsor copy remains right-aligned inside the lower curve. Mobile typography and spacing respond to viewport width and small-viewport height, while the blue row retains enough height for its content. Wider screens retain the original unmasked tower, white introduction panel, and desktop tile arrangement. The desktop hero prefers an 8:5 aspect ratio, with its height capped at `100vh` minus the 72px header on viewports taller than 600px; once capped, the full-width grid and spiral can stretch. At desktop widths above 760px and viewport heights of 600px or less, the cap is removed so the hero keeps its full 8:5 height and its text has room to remain readable. Mobile has no maximum-height cap. Secondary hover/focus copy can scroll within its card on short screens. Layout styles live in `src/components/astro/FibTiling.astro`; hero typography, tower positioning, and perspective geometry live in `src/pages/index.astro`.
 
+On desktop, the tower is bottom-anchored and horizontally centered in the white tile. Its height is `calc(84.5% - 6px)` of that tile, with automatic width preserving the SVG aspect ratio. This fits its outline just below the spiral, including the spiral stroke, in both capped and uncapped layouts.
+
 The desktop spiral sits above tile backgrounds and below text. Curtain and flip faces reuse cropped views of the same path to preserve that order during hover and keyboard-focus reveals.
 
 ### Navigation
