@@ -350,7 +350,6 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
         transition: transform 0.3s;
     }
 
-    .box:hover .arrow,
     .box:focus-visible .arrow {
         transform: translateX(5px);
     }
@@ -383,7 +382,6 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
         gap: var(--space-13);
     }
 
-    .box:hover .curtain,
     .box:focus-visible .curtain {
         transform: translateY(0);
     }
@@ -432,9 +430,22 @@ const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].ma
         transform-style: preserve-3d;
     }
 
-    .flip:hover .flip-in,
     .flip:focus-visible .flip-in {
         transform: rotateY(180deg);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .box:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        .box:hover .curtain {
+            transform: translateY(0);
+        }
+
+        .flip:hover .flip-in {
+            transform: rotateY(180deg);
+        }
     }
 
     .flip .face {

@@ -110,6 +110,8 @@ On desktop, the tower is bottom-anchored and horizontally centered in the white 
 
 The desktop spiral sits above tile backgrounds and below text. Curtain and flip faces reuse cropped views of the same path to preserve that order during hover and keyboard-focus reveals.
 
+Hero tile hover reveals and arrow motion require `(hover: hover) and (pointer: fine)`. Touch taps navigate directly to the speakers or sponsors section without opening the curtain or flipping the tile. Keyboard-focus reveals remain available.
+
 ### Navigation
 
 `src/components/astro/Header.astro` pairs `src/assets/devfest-logo.svg` with the DevFest Pisa 2027 name in a full-width, fixed-height header. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height and locks background scrolling while open. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.
