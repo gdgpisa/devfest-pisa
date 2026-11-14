@@ -89,6 +89,13 @@ const { label } = Astro.props
         display: none;
     }
 
+    /* Short desktop viewports need the full tiling height to keep text readable. */
+    @media (min-width: 761px) and (max-height: 600px) {
+        .fib {
+            max-height: none;
+        }
+    }
+
     @media (max-width: 760px) {
         .fib-section {
             container-type: inline-size;
