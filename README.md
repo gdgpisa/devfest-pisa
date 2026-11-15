@@ -1,8 +1,8 @@
-# Website DevFest Pisa 2026
+# Website DevFest Pisa 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/996efb3d-5136-4b7f-af08-2fd99ddc40ef/deploy-status)](https://app.netlify.com/sites/gdgpisa-devfest-2025/deploys)
 
-The official website for **DevFest Pisa 2026** — a community-driven technology event organized by [GDG Pisa](https://gdg.community.dev/gdg-pisa/) (Google Developer Groups). Scheduled for **April 18, 2026** at MACC (Meeting Art Craft Center) in Pisa, Italy.
+The official website for **DevFest Pisa** — a community-driven technology event organized by [GDG Pisa](https://gdg.community.dev/gdg-pisa/) (Google Developer Groups).
 
 ## Commands
 
