@@ -16,12 +16,19 @@
     box-sizing: border-box;
 }
 
-:root,
-body {
-    overscroll-behavior-y: none;
+@media (min-width: 761px) {
+    :root,
+    body {
+        overscroll-behavior-y: none;
+    }
 }
 
 @media (max-width: 760px) {
+    :root[data-page-scrolled],
+    :root[data-page-scrolled] body {
+        overscroll-behavior-y: none;
+    }
+
     body:has(.site-nav__mobile[open]) {
         overflow: hidden;
     }
