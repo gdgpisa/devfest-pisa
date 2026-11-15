@@ -114,6 +114,8 @@ On page load, a CSS-only entrance lifts the tower into place over 1.8 seconds af
 
 The desktop spiral sits above tile backgrounds and below text. Curtain and flip faces reuse cropped views of the same path to preserve that order during hover and keyboard-focus reveals.
 
+Desktop and mobile spirals draw from the screen-left endpoint along the curve to the other endpoint, using the tower's duration, easing, and delay. An SVG mask animates the exact quarter-circle arc lengths while the visible stroke stays solid and 3px wide. Cropped desktop tile faces share the same path and progress, and the mirrored mobile path also starts on screen left. Reduced-motion users see the complete spiral immediately.
+
 Hero tile hover reveals and arrow motion require `(hover: hover) and (pointer: fine)`. Touch taps navigate directly to the speakers or sponsors section without opening the curtain or flipping the tile. Keyboard-focus reveals remain available.
 
 ### Navigation
