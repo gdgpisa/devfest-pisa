@@ -122,7 +122,9 @@ Hero tile hover reveals and arrow motion require `(hover: hover) and (pointer: f
 
 `src/components/astro/Header.astro` pairs `src/assets/devfest-logo.svg` with the DevFest Pisa 2027 name in a full-width, fixed-height header. Desktop shows inline links; at widths up to 760px, a keyboard-accessible hamburger menu contains Location, Team, and Telegram. The menu overlays the hero without changing its height and locks background scrolling while open. Escape closes it and returns focus to the toggle; outside clicks, link activation, and switching to desktop also close it.
 
-The header scrolls with the page rather than becoming a floating bar. Vertical page overscroll is disabled at desktop widths (761px and above). On mobile, the shared layout uses a passive scroll listener to allow native overscroll only at the top for pull-to-refresh. Once the page scrolls down, overscroll is disabled to prevent bottom-edge bounce/stretch; returning to the top restores pull-to-refresh. Anchor navigation uses native scrolling.
+The header scrolls with the page rather than becoming a floating bar. Vertical page overscroll is disabled at desktop widths (761px and above). Mobile keeps native overscroll and pull-to-refresh, as on `main`; anchor navigation uses native scrolling.
+
+The footer's 21px color bar and mobile page backdrop share `--footer-bar-background`, preserving the six Fibonacci-width segments (1:1:2:3:5:8). The opaque body covers a fixed backdrop whose lower half matches the bar; the upper half keeps the neutral surface color for pull-to-refresh. This CSS-only treatment adds no scrollable space or scroll listeners and does not disable native bounce/stretch.
 
 ### Path Aliases
 

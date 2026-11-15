@@ -59,14 +59,5 @@ const ogImage = new URL('/og-image.png', Astro.site ?? Astro.url)
             <slot />
         </main>
         <Footer />
-        <script>
-            const root = document.documentElement
-            const updatePageScroll = () => {
-                root.toggleAttribute('data-page-scrolled', window.scrollY > 0)
-            }
-
-            updatePageScroll()
-            window.addEventListener('scroll', updatePageScroll, { passive: true })
-        </script>
     </body>
 </html>

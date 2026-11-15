@@ -2,6 +2,15 @@
 
 :root {
     --site-header-height: 72px;
+    --footer-bar-background: linear-gradient(
+        to right,
+        var(--blue) 0% 5%,
+        var(--green) 5% 10%,
+        var(--yellow) 10% 20%,
+        var(--red) 20% 35%,
+        var(--blue) 35% 60%,
+        var(--green) 60% 100%
+    );
 }
 
 @media (max-width: 760px) {
@@ -24,9 +33,13 @@
 }
 
 @media (max-width: 760px) {
-    :root[data-page-scrolled],
-    :root[data-page-scrolled] body {
-        overscroll-behavior-y: none;
+    :root {
+        background-color: var(--surface);
+        background-image: var(--footer-bar-background);
+        background-position: center bottom;
+        background-size: 100% 50%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
 
     body:has(.site-nav__mobile[open]) {

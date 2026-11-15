@@ -40,15 +40,6 @@ const columns = [
     { title: 'Event resources', links: resources },
 ]
 
-// Fibonacci colour bar: 1, 1, 2, 3, 5, 8
-const bar = [
-    { flex: 1, color: 'var(--blue)' },
-    { flex: 1, color: 'var(--green)' },
-    { flex: 2, color: 'var(--yellow)' },
-    { flex: 3, color: 'var(--red)' },
-    { flex: 5, color: 'var(--blue)' },
-    { flex: 8, color: 'var(--green)' },
-]
 ---
 
 <footer class="site-footer">
@@ -72,9 +63,7 @@ const bar = [
         </div>
         <p class="site-footer__copy">Made by GDG &amp; WTM Pisa · © GDG Pisa 2027</p>
     </div>
-    <div class="site-footer__bar" aria-hidden="true">
-        {bar.map(seg => <div style={`flex: ${seg.flex}; background: ${seg.color};`} />)}
-    </div>
+    <div class="site-footer__bar" aria-hidden="true"></div>
 </footer>
 
 <style>
@@ -127,7 +116,7 @@ const bar = [
     }
 
     .site-footer__bar {
-        display: flex;
         height: 21px;
+        background: var(--footer-bar-background);
     }
 </style>
