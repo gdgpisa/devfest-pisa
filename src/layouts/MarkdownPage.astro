@@ -1,8 +1,17 @@
 ---
 import Base from '@/layouts/Base.astro'
+
+type Props = {
+    frontmatter: {
+        title: string
+        description: string
+    }
+}
+
+const { frontmatter } = Astro.props
 ---
 
-<Base>
+<Base title={frontmatter.title} description={frontmatter.description}>
     <section class="wrap section">
         <article class="prose">
             <slot />
@@ -16,21 +25,22 @@ import Base from '@/layouts/Base.astro'
         font: 400 16px/26px var(--font-sans);
     }
 
-    .prose :global(h2) {
+    .prose :global(h1) {
         margin: 0 0 var(--space-34);
         font: 700 clamp(40px, 5.5vw, 89px) / 0.95 var(--font-sans);
         letter-spacing: -0.04em;
         text-wrap: balance;
     }
 
-    .prose :global(h3) {
+    .prose :global(h2) {
         margin: var(--space-55) 0 var(--space-13);
         font: 700 34px/40px var(--font-sans);
         letter-spacing: -0.01em;
     }
 
     /* FAQ questions: ruled rows, like the agenda */
-    .prose :global(h4) {
+    .prose :global(h2:has(+ blockquote)) {
+        letter-spacing: normal;
         margin: var(--space-34) 0 var(--space-8);
         padding-top: var(--space-21);
         border-top: var(--stroke-2) solid var(--ink);

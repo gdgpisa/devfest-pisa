@@ -1,10 +1,12 @@
 ---
 layout: "@/layouts/MarkdownPage.astro"
+title: 'Code of Conduct · DevFest Pisa 2027'
+description: 'Our commitment to an inclusive, harassment-free DevFest Pisa, with participation guidelines and ways to report an incident.'
 ---
 
-## Code of Conduct
+# Code of Conduct
 
-### Introduction
+## Introduction
 
 GDG Pisa DevFest 2027 is dedicated to providing a harassment-free and inclusive event experience for
 everyone regardless of gender identity and expression, sexual orientation, disabilities,
@@ -12,7 +14,7 @@ neurodiversity, physical appearance, body size, ethnicity, nationality, race, ag
 other protected category. We do not tolerate harassment of event participants in any form. GDG Pisa
 DevFest 2027 takes violations of our policy seriously and will respond appropriately.
 
-### Policy
+## Policy
 
 All participants of GDG Pisa DevFest 2027 events must abide by the following policy:
 
@@ -43,7 +45,7 @@ attention. Participants asked to stop any harassing behavior are expected to com
 Practice saying "Yes" to each other. It’s a theatre improv technique to build on each other’s ideas.
 We all benefit when we create together.
 
-### Scope
+## Scope
 
 This policy extends to talks, forums, workshops, code labs, social media, parties, hallway
 conversations, all attendees, partners, sponsors, volunteers, event staff, etc. You catch our drift.
@@ -71,7 +73,7 @@ staff (including volunteers) should not use sexualized clothing/uniforms/costume
 create a sexualized environment. Participants and exhibiting partners or sponsors disobeying this
 policy will be notified and are expected to stop any offending behavior immediately.
 
-### Why this policy is important
+## Why this policy is important
 
 <p>
 Harassment at events and in online communities is unfortunately common. Creating an official policy
@@ -80,19 +82,19 @@ within our events and communities. This policy may prevent harassment by clearly
 expectations for behavior, aims to provide reassurance, and encourages people who have had bad
 experiences at other events to participate in this one.
 
-### License and attribution
+## License and attribution
 
 This policy is licensed under the Creative Commons Zero license. This policy is based on and
 influenced by several other community policies including Ohio LinuxFest Anti-Harassment policy, Con
 Anti-Harassment Project, Geek Feminism Wiki (created by the Ada Initiative), ConfCodeofConduct.com,
 JSconf, Rust, Diversity in Python, and Write/Speak/Code.
 
-### Report incident
+## Report incident
 
 To report an incident look for a staff member by badge/attire or contact us directly at
 pisagdg+coc@gmail.com.
 
-### Anonymous report
+## Anonymous report
 
 You can make an anonymous report by scanning the QR below. We can't follow up with you directly, but
 we will fully investigate it and take whatever action is necessary to prevent a recurrence.

@@ -4,6 +4,9 @@ import FibTiling from '@/components/astro/FibTiling.astro'
 import Spiral from '@/components/astro/Spiral.astro'
 
 import towerSvg from '@/assets/tower_pisa_gray.svg'
+import {
+    floorFront, floorLeft, floorRight, floorBounds, floorPoint, floorBase, floorFrontEdge,
+} from '@/lib/astro/hero-floor'
 
 const SESSIONIZE_URL = 'https://sessionize.com/devfest-pisa-2027/'
 const EVENT_DATE = '10 April 2027'
@@ -25,66 +28,9 @@ const stats = [
     { value: '5+', label: "speakers' nations" },
 ]
 
-// Project a tiled floor through the asset's front and side base corners.
-// The off-panel horizon makes both tile axes converge instead of staying parallel.
-const floorFront = { x: 189.7, y: 684.5 }
-const floorLeft = { x: 2.5, y: 575.5 }
-const floorRight = { x: 373, y: 571.5 }
-const floorHorizon = -600
-const floorDepthX = (floorFront.y - floorRight.y) / (floorRight.y - floorHorizon)
-const floorDepthY = (floorFront.y - floorLeft.y) / (floorLeft.y - floorHorizon)
-const floorAxisX = floorRight.x * (1 + floorDepthX) - floorFront.x
-const floorAxisY = floorLeft.x * (1 + floorDepthY) - floorFront.x
-const floorBounds = { left: -1800, right: 600, top: -350, bottom: 700 }
-
-function projectFloor(x: number, y: number) {
-    const depth = 1 + floorDepthX * x + floorDepthY * y
-    return {
-        x: (floorFront.x + floorAxisX * x + floorAxisY * y) / depth,
-        y: floorHorizon + (floorFront.y - floorHorizon) / depth,
-    }
-}
-
-function floorPoint(point: { x: number; y: number }) {
-    return `${point.x.toFixed(1)} ${point.y.toFixed(1)}`
-}
-
-// Bake the pavement into two SVG paths; no client-side geometry or per-tile DOM.
-let floorTiles = ''
-for (let x = -12; x < 48; x++) {
-    for (let y = -12; y < 48; y++) {
-        if ((x + y) % 2 === 0 || 1 + floorDepthX * x + floorDepthY * y <= 0.2) continue
-        const corners = [
-            projectFloor(x, y),
-            projectFloor(x + 1, y),
-            projectFloor(x + 1, y + 1),
-            projectFloor(x, y + 1),
-        ]
-        if (
-            corners.every(point => point.x < floorBounds.left) ||
-            corners.every(point => point.x > floorBounds.right) ||
-            corners.every(point => point.y < floorBounds.top) ||
-            corners.every(point => point.y > floorBounds.bottom)
-        ) continue
-        floorTiles += `M${corners.map(floorPoint).join('L')}Z`
-    }
-}
-
-const floorNearDepth = (floorFront.y - floorHorizon) / (floorBounds.bottom - floorHorizon)
-const floorFarDepth = (floorFront.y - floorHorizon) / (floorBounds.top - floorHorizon)
-let floorLines = ''
-for (let line = -12; line <= 48; line++) {
-    const nearX = projectFloor(line, (floorNearDepth - 1 - floorDepthX * line) / floorDepthY)
-    const farX = projectFloor(line, (floorFarDepth - 1 - floorDepthX * line) / floorDepthY)
-    const nearY = projectFloor((floorNearDepth - 1 - floorDepthY * line) / floorDepthX, line)
-    const farY = projectFloor((floorFarDepth - 1 - floorDepthY * line) / floorDepthX, line)
-    floorLines += `M${floorPoint(nearX)}L${floorPoint(farX)}M${floorPoint(nearY)}L${floorPoint(farY)}`
-}
-const floorBase = `M${[floorFront, floorRight, projectFloor(1, 1), floorLeft].map(floorPoint).join('L')}Z`
-const floorFrontEdge = `M${[floorLeft, floorFront, floorRight].map(floorPoint).join('L')}`
 ---
 
-<Base>
+<Base preloadFont={false}>
     <FibTiling label="DevFest Pisa 2027 is coming">
         <div class="hero-primary">
         <!-- 5-square: title in the corner the spiral turns around -->
@@ -119,15 +65,15 @@ const floorFrontEdge = `M${[floorLeft, floorFront, floorRight].map(floorPoint).j
                     </filter>
                 </defs>
                 <g class="hero-ground" clip-path="url(#hero-floor-bounds)">
-                    <path class="hero-ground__tiles" d={floorTiles} />
-                    <path class="hero-ground__lines" d={floorLines} vector-effect="non-scaling-stroke" />
+                    <use class="hero-ground__tiles" href="/hero-floor.svg#tiles" />
+                    <use class="hero-ground__lines" href="/hero-floor.svg#lines" />
                 </g>
                 <path class="hero-base" d={floorBase} />
                 <path class="hero-base__opening" d={floorBase} />
                 <g class="hero-tower__reveal">
                     <g class="hero-tower__lift">
                         <use class="hero-tower__surface" href="#hero-tower-profile" />
-                        <image href={towerSvg.src} width="375.6" height="685.7" />
+                        <use class="hero-tower__drawing" href={`${towerSvg.src}#pisa-tower`} width="375.6" height="685.7" />
                     </g>
                 </g>
                 <path class="hero-base hero-base--front" d={floorFrontEdge} />
@@ -602,7 +548,7 @@ const floorFrontEdge = `M${[floorLeft, floorFront, floorRight].map(floorPoint).j
             clip-path: url(#hero-tower-opening);
         }
 
-        .hero-tower image {
+        .hero-tower__drawing {
             filter: url(#hero-tower-ink);
             opacity: 1;
             mask: url(#hero-tower-body);
@@ -768,6 +714,12 @@ const floorFrontEdge = `M${[floorLeft, floorFront, floorRight].map(floorPoint).j
         flex-direction: column;
         gap: var(--space-8);
         align-items: flex-start;
+    }
+
+    /* Keep the off-screen monospace face out of the hero's font downloads. */
+    .sponsor-actions > .mono {
+        content-visibility: auto;
+        contain-intrinsic-block-size: auto 1lh;
     }
 
     .sponsor-actions__link {

@@ -15,6 +15,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
     site: 'https://devfest.gdgpisa.it',
 
+    build: {
+        inlineStylesheets: 'always',
+    },
+
     devToolbar: {
         enabled: false,
     },

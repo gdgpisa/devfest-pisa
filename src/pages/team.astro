@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro'
 import PageHead from '@/components/astro/PageHead.astro'
+import { Picture } from 'astro:assets'
 
 function snakecaseToTitleCase(str: string) {
     return str
@@ -9,7 +10,7 @@ function snakecaseToTitleCase(str: string) {
         .join(' ')
 }
 
-const memberPictures: { default: { src: string } }[] = await Promise.all(
+const memberPictures: { default: ImageMetadata }[] = await Promise.all(
     Object.entries(import.meta.glob<{ default: ImageMetadata }>('@/assets/team/*')).map(([_name, picture]) =>
         picture(),
     ),
@@ -48,20 +49,37 @@ const teamMembers = memberPictures
     .toSorted((a, b) => a.lastName.localeCompare(b.lastName))
 ---
 
-<Base>
+<Base
+    title="Team - DevFest Pisa 2027"
+    description="Meet the organizers and volunteers behind DevFest Pisa 2027, hosted at MACC in Pisa on 10 April 2027."
+>
     <PageHead title="Team" />
     <section id="team" class="wrap section">
         <ul class="people">
             {
-                teamMembers.map(member => (
-                    <li class="person">
-                        <img src={member.picture.default.src} alt={`Picture of ${member.fullName}`} loading="lazy" />
-                        <h3 class="person__name">
-                            <span>{member.firstName}</span>
-                            <span>{member.lastName}</span>
-                        </h3>
-                    </li>
-                ))
+                teamMembers.map((member, index) => {
+                    const maxWidth = Math.min(450, member.picture.default.width, member.picture.default.height)
+                    return (
+                        <li class="person">
+                            <Picture
+                                src={member.picture.default}
+                                alt={`Picture of ${member.fullName}`}
+                                width={220}
+                                height={220}
+                                fit="cover"
+                                formats={['avif']}
+                                fallbackFormat="webp"
+                                widths={[180, 220, 270, 320, 360, maxWidth].filter(width => width <= maxWidth)}
+                                sizes="(max-width: 760px) calc(50vw - 26.5px), 218px"
+                                priority={index < 2}
+                            />
+                            <h2 class="person__name">
+                                <span>{member.firstName}</span>
+                                <span>{member.lastName}</span>
+                            </h2>
+                        </li>
+                    )
+                })
             }
         </ul>
     </section>
@@ -87,6 +105,7 @@ const teamMembers = memberPictures
     .person img {
         display: block;
         width: 100%;
+        height: auto;
         aspect-ratio: 1;
         object-fit: cover;
         border: var(--stroke-2) solid var(--ink);

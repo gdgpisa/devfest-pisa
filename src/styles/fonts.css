@@ -1,0 +1,68 @@
+/* Self-hosted fonts — replaces https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..700&family=Google+Sans+Code:wght@400;500&display=swap
+ * Sources (SIL OFL 1.1, no Reserved Font Name — licenses in src/assets/fonts/*-OFL.txt):
+ *   Google Sans Flex: github.com/google/fonts ofl/googlesansflex GoogleSansFlex[ROND,opsz,slnt,wdth,wght].ttf,
+ *     wdth/ROND/slnt instanced to defaults with fontTools varLib.instancer; variable opsz 6..144 and wght 400..700.
+ *   Google Sans Code: github.com/googlefonts/googlesans-code release v7.001 GoogleSansCode[MONO,wght].ttf (Version 7.001 — same build Google serves),
+ *     MONO axis pinned to default (1); variable wght 400..500.
+ * Subset with fontTools/pyftsubset, retaining default layout features and tabular numerals.
+ * Common English/Italian glyphs load first; the remaining Latin and extended characters load only when used.
+ * Latin faces also retain U+2260 in Flex and arrows/box-drawing glyphs in Code; sans arrows still use system fallback.
+ * Original character coverage is preserved across the subsets. Fetched 2026-11-16.
+ */
+/* latin-ext */
+@font-face {
+  font-family: 'Google Sans Flex';
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/googlesansflex-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* less common latin characters */
+@font-face {
+  font-family: 'Google Sans Flex';
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/googlesansflex-latin-extra.woff2') format('woff2');
+  unicode-range: U+000D, U+00A1-00A8, U+00AA-00AD, U+00AF, U+00B1-00B6, U+00B8-00BF, U+00C1-00C7, U+00CA-00CB, U+00CD-00D1, U+00D3-00D6, U+00D8, U+00DA-00DF, U+00E1-00E7, U+00EA-00EB, U+00ED-00F1, U+00F3-00F8, U+00FA-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2002-2006, U+2009-200A, U+201A, U+201E, U+202F, U+2039-203A, U+2044, U+2122, U+2212;
+}
+/* latin */
+@font-face {
+  font-family: 'Google Sans Flex';
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/googlesansflex-latin.woff2') format('woff2');
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+00B0, U+00B7, U+00C0, U+00C8-00C9, U+00CC, U+00D2, U+00D7, U+00D9, U+00E0, U+00E8-00E9, U+00EC, U+00F2, U+00F9, U+200B, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026, U+20AC, U+2260;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Google Sans Code';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../assets/fonts/googlesanscode-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* less common latin characters */
+@font-face {
+  font-family: 'Google Sans Code';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../assets/fonts/googlesanscode-latin-extra.woff2') format('woff2');
+  unicode-range: U+0000, U+000D, U+00A1-00A8, U+00AA-00AC, U+00AF, U+00B1-00B6, U+00B8-00BF, U+00C1-00C7, U+00CA-00CB, U+00CD-00D1, U+00D3-00D6, U+00D8, U+00DA-00DF, U+00E1-00E7, U+00EA-00EB, U+00ED-00F1, U+00F3-00F8, U+00FA-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+201A, U+201E, U+2032-2033, U+2039-203A, U+2044, U+2122, U+2191, U+2193, U+2212, U+2215, U+2502, U+2514, U+251C, U+25B2, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'Google Sans Code';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../assets/fonts/googlesanscode-latin.woff2') format('woff2');
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+00B0, U+00B7, U+00C0, U+00C8-00C9, U+00CC, U+00D2, U+00D7, U+00D9, U+00E0, U+00E8-00E9, U+00EC, U+00F2, U+00F9, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026, U+20AC, U+2192, U+2500;
+}

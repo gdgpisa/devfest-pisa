@@ -3,11 +3,11 @@ import Base from '@/layouts/Base.astro'
 import FibTiling from '@/components/astro/FibTiling.astro'
 ---
 
-<Base title="404 - Page Not Found">
+<Base title="404 - Page Not Found" description="This page could not be found. Return to the DevFest Pisa 2027 homepage.">
     <FibTiling label="Page not found">
         <!-- 5-square: the number and the exception, in the corner the spiral turns around -->
         <div class="fib__cell fib__s5">
-            <div class="eyebrow muted">Code Exception</div>
+            <div class="eyebrow">Code Exception</div>
             <h1 class="code-404">404</h1>
             <pre
                 class="code-block"><code><span class="kw">try</span> <span>&#123;</span>
@@ -29,7 +29,7 @@ import FibTiling from '@/components/astro/FibTiling.astro'
         <div class="fib__cell fib__s1b" style="background: var(--red);"></div>
     </FibTiling>
 
-    <script>
+    <script is:inline>
         // Random phrases for the 404 page
         const phrases = [
             '"404: Route not registered in the DevFest manifest."',
@@ -144,6 +144,16 @@ import FibTiling from '@/components/astro/FibTiling.astro'
     }
 
     @media (max-width: 760px) {
+        .fib__s5 {
+            grid-column: 1 / -1;
+            grid-row: 1;
+        }
+
+        .home-link {
+            grid-column: 1 / -1;
+            grid-row: 2 / 4;
+        }
+
         .fib__s2,
         .fib__s1a,
         .fib__s1b {

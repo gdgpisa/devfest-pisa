@@ -2,17 +2,26 @@
 import '@/styles/tokens.css'
 import '@/styles/ds-components.css'
 import '@/styles/site.css'
+import '@/styles/fonts.css'
+import sansFont from '@/assets/fonts/googlesansflex-latin.woff2?url'
 
 import Footer from '@/components/astro/Footer.astro'
 import Header from '@/components/astro/Header.astro'
 
 type Props = {
     title?: string
+    description?: string
+    preloadFont?: boolean
 }
 
-const { title = 'DevFest Pisa 2027' } = Astro.props
+const {
+    title = 'DevFest Pisa 2027',
+    description = 'Join DevFest Pisa on 10 April 2027 at MACC for tech talks, workshops and community networking. Calls for speakers and sponsors are open.',
+    preloadFont = true,
+} = Astro.props
 
 const ogImage = new URL('/og-image.png', Astro.site ?? Astro.url)
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url)
 ---
 
 <html lang="en">
@@ -21,32 +30,28 @@ const ogImage = new URL('/og-image.png', Astro.site ?? Astro.url)
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
 
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.url} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="DevFest Pisa, 10 April 2027, MACC, Pisa" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-            property="og:description"
-            content={`Unisciti alla DevFest Pisa, l'evento che riunisce la community tech per crescere e innovare insieme!
-                 Talk ispirazionali, workshop pratici e networking con esperti del settore. Perché solo insieme possiamo
-                 costruire il futuro della tecnologia! 🚀`.replace(/\s+/g, ' ')}
-        />
+        <meta property="og:description" content={description} />
 
         <!-- Address Bar Color -->
         <meta name="theme-color" content="#ffbf00" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#ffbf00" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..700&family=Google+Sans+Code:wght@400;500&display=swap"
-        />
+        {
+            preloadFont && (
+                <link rel="preload" href={sansFont} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+            )
+        }
 
         <script defer src="https://cloud.umami.is/script.js" data-website-id="6a2d9e3e-6360-4797-b976-e15276cc1d42"
         ></script>
