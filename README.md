@@ -79,6 +79,8 @@ src/
 
 - Sponsor/partner data in modular TypeScript files with image imports
 
+**Social preview:** `src/layouts/Base.astro` sets the Open Graph image and its dimensions. Netlify preview builds use `DEPLOY_PRIME_URL` for the image URL without changing the production canonical URL. When replacing the artwork in `public/`, use a new filename to avoid stale cached previews and update the declared dimensions to match.
+
 ## Development
 
 ### Setup
