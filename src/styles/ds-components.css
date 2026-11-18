@@ -86,6 +86,13 @@ body {
 .dp-tag--ai::before {
     background: var(--red);
 }
+/* Neutral variant for "everything else": white chip, hollow dot */
+.dp-tag--other {
+    background: #ffffff;
+}
+.dp-tag--other::before {
+    background: transparent;
+}
 
 /* SessionCard */
 .dp-session {
